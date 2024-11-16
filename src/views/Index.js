@@ -30,6 +30,16 @@ export default function Index() {
         </div>
         <Footer />
       </div>
+
+      <style jsx>{`
+  @media (max-width: 600px) {
+    .wrapper {
+      margin-top: 100px;
+    }
+  }
+`}</style>
     </>
+
+
   );
 }
