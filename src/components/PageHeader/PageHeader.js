@@ -2,7 +2,6 @@ import React from "react";
 import "./PageHeader.css";
 // reactstrap components
 import { Container } from "reactstrap";
-import Promocao from "views/IndexSections/promocao";
 export default function PageHeader() {
   return (
     <div className="page-header ">
@@ -13,7 +12,6 @@ export default function PageHeader() {
             className="img-fluid"
             src={require("assets/img/logo_gold.png")}
           />
-          <Promocao />
         </div>
       </Container>
     </div>
