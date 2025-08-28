@@ -1,5 +1,5 @@
 // src/views/paginas/galeria.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 
 // layout
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
@@ -18,20 +18,17 @@ import "assets/css/galeria.css";
 /* =========================================================
    HELPERS
    ========================================================= */
-/* helper: importa tudo e permite excluir por regex */
 function importAll(r, excludeRe) {
   return r
     .keys()
-    .filter((k) => (excludeRe ? !excludeRe.test(k) : true)) // k é tipo "./01.webp" ou "./capa.jpg"
+    .filter((k) => (excludeRe ? !excludeRe.test(k) : true))
     .map(r);
 }
-
-/* regex para excluir capa.* (jpg|jpeg|png|webp), case-insensitive */
 const EXCLUDE_COVER = /\/?capa\.(jpg|jpeg|png|webp)$/i;
-
 
 const moneyBRL = (cents) =>
   (cents / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
 function fileNameFromSrc(imgSrc) {
   try {
     const parts = imgSrc.split("/");
@@ -42,14 +39,8 @@ function fileNameFromSrc(imgSrc) {
 }
 
 /* =========================================================
-   IMPORTS DE IMAGENS
-   - Galeria usa IMAGENS MARCADAS (img_wm)
-   - Capas são imagens “limpas” (opcional)
+   IMPORTS DE IMAGENS (com marca d’água)
    ========================================================= */
-// Capas
-
-// Galerias (com marca d’água gerada pelo script)
-/* agora use o helper passando o EXCLUDE_COVER */
 const coreografia1Imgs = importAll(
   require.context(
     "assets/img_wm/espetaculos/novembro/coreografia_1",
@@ -58,7 +49,6 @@ const coreografia1Imgs = importAll(
   ),
   EXCLUDE_COVER
 );
-
 const coreografia2Imgs = importAll(
   require.context(
     "assets/img_wm/espetaculos/novembro/coreografia_2",
@@ -67,7 +57,6 @@ const coreografia2Imgs = importAll(
   ),
   EXCLUDE_COVER
 );
-
 const coreografia3Imgs = importAll(
   require.context(
     "assets/img_wm/espetaculos/novembro/coreografia_3",
@@ -79,19 +68,19 @@ const coreografia3Imgs = importAll(
 
 /* ===================== CONFIG ===================== */
 const WHATSAPP_NUMBER = "5511991502640"; // DDI+DDD+número
-const PRICE_PER_PHOTO = 2000; // em centavos (R$ 15,00)
+const PRICE_PER_PHOTO = 2000; // em centavos (R$ 20,00)
 
 /* ===================== DADOS (EVENTS) ===================== */
 const EVENTS = [
   {
     id: "esp-novembro",
     title: "Espetáculo 01",
-    cover: coverNovembro, // capa do evento
+    cover: coverNovembro,
     coreos: [
       {
         id: "esp-novembro-coreo-01",
         title: "COREOGRAFIA 01 - Baby class",
-        cover: coverCoreo1, // capa da coreografia
+        cover: coverCoreo1,
         images: coreografia1Imgs,
       },
       {
@@ -202,6 +191,89 @@ export default function Galeria() {
   const TotalStrong = ({ value }) => (
     <span style={{ color: "#e6b557", fontWeight: 800, fontSize: 18 }}>{value}</span>
   );
+
+  /* ===================== VIEWER (imagem grande) ===================== */
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [viewerData, setViewerData] = useState({
+    coreoId: null,
+    imgSrc: null,
+    file: null,
+    index: -1, // índice dentro da coreografia atual
+  });
+
+  const openViewer = useCallback(
+    (coreoIdParam, imgSrcParam) => {
+      const list = currentCoreo?.images || [];
+      const idx = list.findIndex((src) => src === imgSrcParam);
+      const file = fileNameFromSrc(imgSrcParam);
+      setViewerData({
+        coreoId: coreoIdParam,
+        imgSrc: imgSrcParam,
+        file,
+        index: idx < 0 ? 0 : idx,
+      });
+      setViewerOpen(true);
+    },
+    [currentCoreo]
+  );
+
+  const closeViewer = () => setViewerOpen(false);
+
+  const isCurrentSelected = useCallback(() => {
+    if (!viewerData.coreoId || !viewerData.file) return false;
+    const composedId = `${viewerData.coreoId}::${viewerData.file}`;
+    return cart.items.includes(composedId);
+  }, [viewerData, cart.items]);
+
+  const toggleSelectCurrentAndClose = useCallback(() => {
+    if (!viewerData.coreoId || !viewerData.file) return;
+    const composedId = `${viewerData.coreoId}::${viewerData.file}`;
+    cart.toggle(composedId);
+    setViewerOpen(false);
+  }, [viewerData, cart]);
+
+  const navigate = useCallback(
+    (delta) => {
+      if (!currentCoreo?.images?.length) return;
+      const total = currentCoreo.images.length;
+      if (total === 0) return;
+
+      let nextIndex = viewerData.index + delta;
+      if (nextIndex < 0) nextIndex = total - 1; // circular
+      if (nextIndex >= total) nextIndex = 0;    // circular
+
+      const nextSrc = currentCoreo.images[nextIndex];
+      setViewerData({
+        coreoId: currentCoreo.id,
+        imgSrc: nextSrc,
+        file: fileNameFromSrc(nextSrc),
+        index: nextIndex,
+      });
+    },
+    [currentCoreo, viewerData.index]
+  );
+
+  // atalhos de teclado no viewer
+  useEffect(() => {
+    if (!viewerOpen) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeViewer();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        navigate(-1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        navigate(1);
+      } else if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        toggleSelectCurrentAndClose();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [viewerOpen, navigate, toggleSelectCurrentAndClose]);
 
   return (
     <>
@@ -324,7 +396,7 @@ export default function Galeria() {
                     ))}
                   </div>
 
-                  {/* Barra inferior: Total + Voltar + Finalizar */}
+                  {/* Barra inferior: Total + Finalizar */}
                   <div className="row w-100 m-0 mt-3 align-items-center">
                     <div className="col-6 col-md-3 ms-auto">
                       <div style={{ textAlign: "end" }} className="row w-100 m-0 mt-3 align-items-center">
@@ -337,7 +409,6 @@ export default function Galeria() {
                           Finalizar
                         </button>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -347,17 +418,16 @@ export default function Galeria() {
               {view === "coreo" && currentCoreo && (
                 <div style={{ marginTop: 16 }}>
                   {/* Top bar */}
-                    <div style={{ placeContent: "end" }} className="row w-100 m-0 mt-3">
-                      <div className="col-12 col-md-3 text-end">
-                        <button
-                          onClick={() => setView("event")}
-                          className="btn btn-outline-secondary w-100"
-                        >
-                          ← Voltar
-                        </button>
-                      </div>
+                  <div style={{ placeContent: "end" }} className="row w-100 m-0 mt-3">
+                    <div className="col-12 col-md-3 text-end">
+                      <button
+                        onClick={() => setView("event")}
+                        className="btn btn-outline-secondary w-100"
+                      >
+                        ← Voltar
+                      </button>
                     </div>
-
+                  </div>
 
                   <div className="bar-stack" style={{ display: "flex", alignItems: "center", gap: 12 }}>
                     <h4 style={{ margin: 0 }}>{currentCoreo.title}</h4>
@@ -389,8 +459,10 @@ export default function Galeria() {
                       return (
                         <div
                           key={composedId}
-                          onClick={() => cart.toggle(composedId)}
+                          onClick={() => openViewer(currentCoreo.id, imgSrc)}
                           className={`thumb border rounded-3 ${selected ? "is-selected" : ""}`}
+                          role="button"
+                          tabIndex={0}
                         >
                           <span className="thumb-label">{file}</span>
                           <img alt={file} loading="lazy" src={imgSrc} />
@@ -422,7 +494,6 @@ export default function Galeria() {
                           Finalizar
                         </button>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -441,112 +512,146 @@ export default function Galeria() {
       </div>
 
       {/* ===== MODAL DE RESUMO DETALHADO ===== */}
-<Modal
-  isOpen={showResumo}
-  toggle={() => setShowResumo(false)}
-  className="modal-checkout modal-top"   // classe no container .modal (tema + topo)
-  modalClassName="modal-top"             // classe em .modal-dialog (topo)
-  scrollable
->
-  <ModalHeader toggle={() => setShowResumo(false)}>
-    <span className="badge">Finalizar pedido</span>
-  </ModalHeader>
+      <Modal
+        isOpen={showResumo}
+        toggle={() => setShowResumo(false)}
+        className="modal-checkout modal-top"
+        modalClassName="modal-top"
+        scrollable
+      >
+        <ModalHeader toggle={() => setShowResumo(false)}>
+          <span className="badge">Finalizar pedido</span>
+        </ModalHeader>
 
-  <ModalBody>
-    {cart.count === 0 ? (
-      <p>Nenhuma foto selecionada.</p>
-    ) : (
-      <div className="mc-grid">
-        <div className="card-soft">
-          <div className="mc-h6">
-            Selecionadas por coreografia <span className="badge">{cart.count}</span>
-          </div>
-          <div className="sel-list">
-            {currentEvent?.coreos?.map((c) => {
-              const list = (groupedByCoreo[c.id] || []);
-              if (!list.length) return null;
-              return (
-                <div key={c.id} style={{ marginBottom: 12 }}>
-                  <div style={{ fontWeight: 700, marginBottom: 6 }}>{c.title}</div>
-                  <div style={{ display: "grid", gap: 6 }}>
-                    {list.map((name) => (
-                      <div key={name} className="sel-item">{name}</div>
-                    ))}
-                  </div>
+        <ModalBody>
+          {cart.count === 0 ? (
+            <p>Nenhuma foto selecionada.</p>
+          ) : (
+            <div className="mc-grid">
+              <div className="card-soft">
+                <div className="mc-h6">
+                  Selecionadas por coreografia <span className="badge">{cart.count}</span>
                 </div>
-              );
-            })}
+                <div className="sel-list">
+                  {currentEvent?.coreos?.map((c) => {
+                    const list = groupedByCoreo[c.id] || [];
+                    if (!list.length) return null;
+                    return (
+                      <div key={c.id} style={{ marginBottom: 12 }}>
+                        <div style={{ fontWeight: 700, marginBottom: 6 }}>{c.title}</div>
+                        <div style={{ display: "grid", gap: 6 }}>
+                          {list.map((name) => (
+                            <div key={name} className="sel-item">
+                              {name}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="total-row">
+                  <div className="total-label">Valor total</div>
+                  <div className="total-value">{moneyBRL(cart.totalCents)}</div>
+                </div>
+                <div className="small" style={{ marginTop: 6, textAlign: "end" }}>
+                  ({moneyBRL(PRICE_PER_PHOTO)} por foto)
+                </div>
+              </div>
+
+              <div className="card-soft">
+                <div className="mc-h6">Seus dados</div>
+                <Row className="g-2">
+                  <Col sm="12">
+                    <label className="form-label">Nome completo</label>
+                    <input
+                      className="form-control"
+                      value={form.nome}
+                      onChange={(e) => setForm({ ...form, nome: e.target.value })}
+                      placeholder="Seu nome"
+                    />
+                  </Col>
+                  <Col sm="12">
+                    <label className="form-label">E-mail</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="seu@email.com"
+                    />
+                  </Col>
+                  <Col sm="12">
+                    <label className="form-label">Telefone (DDD + número)</label>
+                    <input
+                      className="form-control"
+                      value={form.tel}
+                      onChange={(e) => setForm({ ...form, tel: e.target.value })}
+                      placeholder="11999999999"
+                    />
+                  </Col>
+                </Row>
+              </div>
+            </div>
+          )}
+        </ModalBody>
+
+        <ModalFooter className="w-100 d-flex justify-content-between">
+          <button className="btn btn-outline-secondary" onClick={() => setShowResumo(false)}>
+            Voltar
+          </button>
+
+          <button
+            className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"}`}
+            onClick={() => {
+              // if (!form.nome || !form.email || !form.tel) { alert("Preencha nome, e-mail e telefone."); return; }
+              finalizarNoWhats();
+            }}
+            disabled={cart.count === 0}
+          >
+            Finalizar
+          </button>
+        </ModalFooter>
+      </Modal>
+
+      {/* ===== MODAL DE VISUALIZAÇÃO DE IMAGEM ===== */}
+      <Modal isOpen={viewerOpen} toggle={closeViewer} className="modal-viewer" centered>
+        <ModalHeader toggle={closeViewer}>
+          <div className="d-flex flex-column">
+            <span className="fw-bold">Visualizar foto</span>
+            {!!viewerData.file && <small className="text-muted">{viewerData.file}</small>}
           </div>
-          <div className="total-row">
-            <div className="total-label">Valor total</div>
-            <div className="total-value">{moneyBRL(cart.totalCents)}</div>
-          </div>
-          <div className="small" style={{ marginTop: 6, textAlign: "end" }}>
-            ({moneyBRL(PRICE_PER_PHOTO)} por foto)
-          </div>
-        </div>
+        </ModalHeader>
 
-        <div className="card-soft">
-          <div className="mc-h6">Seus dados</div>
-          <Row className="g-2">
-            <Col sm="12">
-              <label className="form-label">Nome completo</label>
-              <input
-                className="form-control"
-                value={form.nome}
-                onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                placeholder="Seu nome"
+        <ModalBody className="p-0">
+          {viewerData.imgSrc ? (
+            <div className="viewer-img-wrap">
+              {/* seta esquerda */}
+              <img
+                src={viewerData.imgSrc}
+                alt={viewerData.file || "foto"}
+                className="viewer-img"
               />
-            </Col>
-            <Col sm="12">
-              <label className="form-label">E-mail</label>
-              <input
-                type="email"
-                className="form-control"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                placeholder="seu@email.com"
-              />
-            </Col>
-            <Col sm="12">
-              <label className="form-label">Telefone (DDD + número)</label>
-              <input
-                className="form-control"
-                value={form.tel}
-                onChange={(e) => setForm({ ...form, tel: e.target.value })}
-                placeholder="11999999999"
-              />
-            </Col>
-          </Row>
-        </div>
-      </div>
-    )}
-  </ModalBody>
+            </div>
+          ) : (
+            <div className="p-4 text-center text-muted">Carregando…</div>
+          )}
+        </ModalBody>
 
-<ModalFooter className="w-100 d-flex justify-content-between">
-  <button
-    className="btn btn-outline-secondary"
-    onClick={() => setShowResumo(false)}
-  >
-    Voltar
-  </button>
+        <ModalFooter className="w-100 d-flex justify-content-between">
+          <button className="btn btn-outline-secondary" onClick={closeViewer}>
+            Voltar
+          </button>
 
-  <button
-    className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"}`}
-    onClick={() => {
-      // Validação opcional:
-      // if (!form.nome || !form.email || !form.tel) { alert("Preencha nome, e-mail e telefone."); return; }
-      finalizarNoWhats();
-    }}
-    disabled={cart.count === 0}
-  >
-    Finalizar
-  </button>
-</ModalFooter>
+          <button
+            className={`btn ${isCurrentSelected() ? "btn-secondary" : "btn-success"}`}
+            onClick={toggleSelectCurrentAndClose}
+          >
+            {isCurrentSelected() ? "Remover da seleção" : "Selecionar esta foto"}
+          </button>
+        </ModalFooter>
 
-</Modal>
-
-
+      </Modal>
     </>
   );
 }

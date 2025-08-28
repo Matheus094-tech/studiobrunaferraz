@@ -56,6 +56,35 @@ img, video {
   color: #171941;
 }
 
+/* ==================== BOTÕES (tema nos MODAIS) ==================== */
+.modal-viewer .btn-success,
+.modal-checkout .btn-success {
+  background: #e6b557;
+  border: none;
+  color: #171941;
+  font-weight: 700;
+  border-radius: 10px;
+}
+.modal-viewer .btn-success:hover,
+.modal-checkout .btn-success:hover {
+  background: #f2cf74;
+  color: #171941;
+}
+
+.modal-viewer .btn-outline-secondary,
+.modal-checkout .btn-outline-secondary {
+  border: 1px solid #e6b557;
+  color: #e6b557;
+  background: transparent;
+  border-radius: 10px;
+}
+.modal-viewer .btn-outline-secondary:hover,
+.modal-checkout .btn-outline-secondary:hover {
+  background: #e6b557;
+  color: #171941;
+}
+
+
 /* ===== utilitários responsivos ===== */
 .btn-mobile { width: 100%; max-width: 100%; }
 .bar-stack   { width: 100%; }
