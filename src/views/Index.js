@@ -1,3 +1,4 @@
+// src/views/Index.js
 import React from "react";
 
 // core components
@@ -6,19 +7,19 @@ import PageHeader from "components/PageHeader/PageHeader.js";
 import Footer from "components/Footer/Footer.js";
 
 // sections for this page/view
+// (ajuste os caminhos/exactos nomes conforme seus arquivos reais)
 import Sobre from "views/IndexSections/sobre_mim";
-import Equipe from "views/IndexSections/equipe.js";
-import Contato from "views/IndexSections/contato"
-
+import Equipe from "views/IndexSections/equipe";
+import Contato from "views/IndexSections/contato";
 
 export default function Index() {
   React.useEffect(() => {
     document.body.classList.toggle("index-page");
-    // Specify how to clean up after this effect:
-    return function cleanup() {
+    return () => {
       document.body.classList.toggle("index-page");
     };
   }, []);
+
   return (
     <>
       <IndexNavbar />

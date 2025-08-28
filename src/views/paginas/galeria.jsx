@@ -615,7 +615,12 @@ export default function Galeria() {
       </Modal>
 
       {/* ===== MODAL DE VISUALIZAÇÃO DE IMAGEM ===== */}
-      <Modal isOpen={viewerOpen} toggle={closeViewer} className="modal-viewer" centered>
+      <Modal
+        isOpen={viewerOpen}
+        toggle={closeViewer}
+        className="modal-viewer modal-top"   // adiciona modal-top aqui
+        modalClassName="modal-top"           // e aqui, para garantir na .modal-dialog
+      >
         <ModalHeader toggle={closeViewer}>
           <div className="d-flex flex-column">
             <span className="fw-bold">Visualizar foto</span>

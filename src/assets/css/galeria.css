@@ -1,30 +1,7 @@
-/* ==================== BASE + LAYOUT ==================== */
-html, body {
-  height: 100%;
-  overflow-x: hidden;            /* evita scroll lateral global */
-}
-
-body.index-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.wrapper, .main {
-  flex: 1 0 auto;
-  overflow-x: hidden;            /* evita estourar por filhos */
-  box-sizing: border-box;
-}
-
-img, video {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ==================== SEÇÃO PRINCIPAL ==================== */
+/* ==================== SEÇÃO PRINCIPAL (escopo) ==================== */
 #comprar-fotos {
   padding-top: 100px;            /* espaço abaixo do Navbar */
-  overflow-x: hidden;            /* garante sem rolagem lateral */
+  overflow-x: hidden;            /* sem rolagem lateral horizontal */
 }
 
 #comprar-fotos h2.title {
@@ -84,11 +61,10 @@ img, video {
   color: #171941;
 }
 
-
-/* ===== utilitários responsivos ===== */
-.btn-mobile { width: 100%; max-width: 100%; }
-.bar-stack   { width: 100%; }
-.bar-stack > * { max-width: 100%; }
+/* ===== utilitários responsivos restritos ao escopo ===== */
+#comprar-fotos .btn-mobile { width: 100%; max-width: 100%; }
+#comprar-fotos .bar-stack   { width: 100%; }
+#comprar-fotos .bar-stack > * { max-width: 100%; }
 
 /* ==================== BADGES ==================== */
 #comprar-fotos .badge {
@@ -101,12 +77,12 @@ img, video {
 
 /* ==================== CARDS (eventos + coreografias) ==================== */
 #comprar-fotos .p-3.border.rounded-3 {
-  background: #171941;                /* único azul do site */
+  background: #171941;
   border: 1px solid #2c2f55;
   border-radius: 16px;
   color: #fff;
   transition: transform 0.15s ease;
-  box-sizing: border-box;             /* evita estourar pelo padding */
+  box-sizing: border-box;
 }
 #comprar-fotos .p-3.border.rounded-3:hover {
   transform: translateY(-4px);
@@ -121,9 +97,8 @@ img, video {
   color: #c5c5c5 !important;
 }
 
-/* ==================== GRIDS (seguros no mobile) ==================== */
-/* use junto do inline grid-template, mas com minmax(0,1fr) */
-.grid-xs-1 {
+/* ==================== GRIDS (seguras no mobile) ==================== */
+#comprar-fotos .grid-xs-1 {
   display: grid;
   gap: 12px;
   grid-template-columns: repeat(auto-fill, minmax(0, 1fr)); /* evita overflow */
@@ -181,59 +156,60 @@ img, video {
   justify-content: center;
 }
 
-/* ==================== MODAL DE CHECKOUT (tema do site) ==================== */
+/* ==================== MODAIS – BACKDROP E TEMA ==================== */
 body.index-page.modal-open .modal-backdrop.show {
   background-color: rgba(0,0,0,.85);
 }
 
-body.index-page .modal-checkout .modal-content {
-  background: #171941;                 /* azul único */
+/* Checkout tematizado (apenas quando usa a classe .modal-checkout) */
+.modal-checkout .modal-content {
+  background: #171941;
   color: #f2f2f2;
   border: 1px solid #2c2f55;
   border-radius: 20px;
   overflow: hidden;
 }
-body.index-page .modal-checkout .modal-header {
+.modal-checkout .modal-header {
   border: 0;
   padding: 18px 20px 0;
   color: #e6b557;
 }
-body.index-page .modal-checkout .modal-title {
+.modal-checkout .modal-title {
   font-weight: 800;
   letter-spacing: .3px;
 }
-body.index-page .modal-checkout .modal-body {
+.modal-checkout .modal-body {
   padding: 10px 16px 0;
 }
 
 /* cartões internos no modal (mesmo azul) */
-body.index-page .modal-checkout .card-soft {
+.modal-checkout .card-soft {
   background: #171941;
   border: 1px solid #2c2f55;
   border-radius: 16px;
   padding: 14px;
 }
 
-body.index-page .modal-checkout .mc-h6 {
+.modal-checkout .mc-h6 {
   font-size: 14px;
   font-weight: 800;
   margin: 0 0 10px 0;
   display: flex; align-items: center; gap: 8px;
   color: #e6b557;
 }
-body.index-page .modal-checkout .badge {
+.modal-checkout .badge {
   background: #171941;
   border: 1px solid #2c2f55;
   color: #e6e6e6;
 }
 
 /* lista de fotos selecionadas */
-body.index-page .modal-checkout .sel-list {
+.modal-checkout .sel-list {
   max-height: 260px;
   overflow: auto;
   scrollbar-width: thin;
 }
-body.index-page .modal-checkout .sel-item {
+.modal-checkout .sel-item {
   font-size: 13px;
   color: #ddd;
   padding: 6px 10px;
@@ -243,24 +219,24 @@ body.index-page .modal-checkout .sel-item {
 }
 
 /* formulário */
-body.index-page .modal-checkout .form-label {
+.modal-checkout .form-label {
   color: #e6b557;
   font-weight: 700;
   font-size: 13px;
 }
-body.index-page .modal-checkout .form-control {
+.modal-checkout .form-control {
   background: #171941;
   border: 1px solid #2c2f55;
   color: #fff;
   border-radius: 12px;
   min-height: 46px;
 }
-body.index-page .modal-checkout .form-control::placeholder {
+.modal-checkout .form-control::placeholder {
   color: #9a9a9a;
 }
 
 /* total */
-body.index-page .modal-checkout .total-row {
+.modal-checkout .total-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -270,15 +246,15 @@ body.index-page .modal-checkout .total-row {
   border: 1px solid #2c2f55;
   margin-top: 8px;
 }
-body.index-page .modal-checkout .total-label { color: #e6e6e6; }
-body.index-page .modal-checkout .total-value {
+.modal-checkout .total-label { color: #e6e6e6; }
+.modal-checkout .total-value {
   color: #e6b557;
   font-weight: 900;
   font-size: 18px;
 }
 
 /* footer do modal (fixo e responsivo) */
-body.index-page .modal-checkout .modal-footer {
+.modal-checkout .modal-footer {
   border: 0;
   position: sticky;
   bottom: 0;
@@ -287,8 +263,8 @@ body.index-page .modal-checkout .modal-footer {
   display: flex; gap: 10px; flex-wrap: wrap;
 }
 
-/* botões dentro do modal */
-body.index-page .modal-checkout .btn-success {
+/* botões dentro do modal de checkout */
+.modal-checkout .btn-success {
   border: 1px solid #e6b557;
   background: linear-gradient(90deg,#fff6b0,#e6b557);
   color: #171941;
@@ -296,42 +272,92 @@ body.index-page .modal-checkout .btn-success {
   border-radius: 12px;
   min-height: 46px;
 }
-body.index-page .modal-checkout .btn-outline-secondary {
+.modal-checkout .btn-outline-secondary {
   border: 1px solid #e6b557;
   color: #e6b557;
   border-radius: 12px;
   min-height: 46px;
 }
 
-/* ===== Modal colado no topo — versão mínima, sem espaços extras ===== */
-/* funciona se a classe estiver no container .modal OU diretamente na .modal-dialog */
+/* ==================== VIEWER (imagem grande + setas) ==================== */
+.modal-viewer .modal-content {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111;
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+.viewer-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* NAV (setas) */
+.viewer-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,.45);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+  user-select: none;
+}
+.viewer-nav:hover {
+  background: rgba(0,0,0,.65);
+  transform: translateY(-50%) scale(1.04);
+}
+.viewer-nav:active {
+  transform: translateY(-50%) scale(0.98);
+}
+.viewer-nav-left { left: 12px; }
+.viewer-nav-right { right: 12px; }
+
+.viewer-arrow {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+/* ==================== MODAL NO TOPO (somente quando usa .modal-top) ==================== */
 .modal.modal-top .modal-dialog,
 .modal-dialog.modal-top {
   margin: 8px auto !important;   /* topo com respiro */
   transform: none !important;    /* previne translateY de temas */
 }
-
-/* se alguma classe "centered" vier junto, neutraliza */
 .modal.modal-top .modal-dialog.modal-dialog-centered,
 .modal-dialog.modal-top.modal-dialog-centered {
   align-items: stretch !important;
 }
-
-/* conteúdo do modal ocupa só o necessário */
 .modal.modal-top .modal-content,
 .modal-dialog.modal-top .modal-content {
-  max-height: none !important;   /* sem limite de altura */
-  margin-top: 0 !important;      /* cola no topo */
-  overflow: visible !important;  /* não força barra de rolagem desnecessária */
+  max-height: none !important;
+  margin-top: 0 !important;
+  overflow: visible !important;
 }
-
-
-/* remove padding que às vezes o Bootstrap põe no container modal */
 .modal.modal-top {
   padding-top: 0 !important;
 }
 
-/* ==================== MOBILE FIXES ==================== */
+/* ==================== MOBILE FIXES (escopo) ==================== */
 @media (max-width: 576px) {
   #comprar-fotos .container {
     padding-left: 12px;
@@ -339,21 +365,18 @@ body.index-page .modal-checkout .btn-outline-secondary {
     overflow-x: hidden;
   }
 
-  /* grids em 1 coluna e seguras */
-  .grid-xs-1 {
+  #comprar-fotos .grid-xs-1 {
     grid-template-columns: minmax(0, 1fr) !important;
     gap: 12px !important;
   }
 
-  /* barras de ação empilhadas e sem overflow */
-  .bar-stack {
+  #comprar-fotos .bar-stack {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 10px !important;
   }
 
-  /* botões gerais que precisam ocupar largura em mobile (não os de barra inferior) */
-  .btn-mobile {
+  #comprar-fotos .btn-mobile {
     width: 100% !important;
     white-space: normal;
     word-break: break-word;
