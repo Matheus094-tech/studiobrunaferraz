@@ -179,7 +179,7 @@ body.index-page .modal-checkout .modal-body {
 
 /* cartões internos no modal (mesmo azul) */
 body.index-page .modal-checkout .card-soft {
-  background: #171941;                 /* removido azul mais claro */
+  background: #171941;
   border: 1px solid #2c2f55;
   border-radius: 16px;
   padding: 14px;
@@ -274,6 +274,34 @@ body.index-page .modal-checkout .btn-outline-secondary {
   min-height: 46px;
 }
 
+/* ===== Modal colado no topo — versão mínima, sem espaços extras ===== */
+/* funciona se a classe estiver no container .modal OU diretamente na .modal-dialog */
+.modal.modal-top .modal-dialog,
+.modal-dialog.modal-top {
+  margin: 8px auto !important;   /* topo com respiro */
+  transform: none !important;    /* previne translateY de temas */
+}
+
+/* se alguma classe "centered" vier junto, neutraliza */
+.modal.modal-top .modal-dialog.modal-dialog-centered,
+.modal-dialog.modal-top.modal-dialog-centered {
+  align-items: stretch !important;
+}
+
+/* conteúdo do modal ocupa só o necessário */
+.modal.modal-top .modal-content,
+.modal-dialog.modal-top .modal-content {
+  max-height: none !important;   /* sem limite de altura */
+  margin-top: 0 !important;      /* cola no topo */
+  overflow: visible !important;  /* não força barra de rolagem desnecessária */
+}
+
+
+/* remove padding que às vezes o Bootstrap põe no container modal */
+.modal.modal-top {
+  padding-top: 0 !important;
+}
+
 /* ==================== MOBILE FIXES ==================== */
 @media (max-width: 576px) {
   #comprar-fotos .container {
@@ -295,7 +323,7 @@ body.index-page .modal-checkout .btn-outline-secondary {
     gap: 10px !important;
   }
 
-  /* botões ocupam a largura e quebram texto longo */
+  /* botões gerais que precisam ocupar largura em mobile (não os de barra inferior) */
   .btn-mobile {
     width: 100% !important;
     white-space: normal;

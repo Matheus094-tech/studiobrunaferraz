@@ -441,97 +441,112 @@ export default function Galeria() {
       </div>
 
       {/* ===== MODAL DE RESUMO DETALHADO ===== */}
-      <Modal className="modal-checkout" isOpen={showResumo} toggle={() => setShowResumo(false)}>
-        <ModalHeader toggle={() => setShowResumo(false)}><span className="badge">Finalizar pedido</span></ModalHeader>
-        <ModalBody>
-          {cart.count === 0 ? (
-            <p>Nenhuma foto selecionada.</p>
-          ) : (
-            <div className="mc-grid">
-              <div className="card-soft">
-                <div className="mc-h6">
-                  Selecionadas por coreografia <span className="badge">{cart.count}</span>
-                </div>
-                <div className="sel-list">
-                  {currentEvent?.coreos?.map((c) => {
-                    const list = (groupedByCoreo[c.id] || []);
-                    if (!list.length) return null;
-                    return (
-                      <div key={c.id} style={{ marginBottom: 12 }}>
-                        <div style={{ fontWeight: 700, marginBottom: 6 }}>{c.title}</div>
-                        <div style={{ display: "grid", gap: 6 }}>
-                          {list.map((name) => (
-                            <div key={name} className="sel-item">{name}</div>
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="total-row">
-                  <div className="total-label">Valor total</div>
-                  <div className="total-value">{moneyBRL(cart.totalCents)}</div>
-                </div>
-                <div className="text-muted small" style={{ marginTop: 6 }}>
-                  ({moneyBRL(PRICE_PER_PHOTO)} por foto)
-                </div>
-              </div>
+<Modal
+  isOpen={showResumo}
+  toggle={() => setShowResumo(false)}
+  className="modal-checkout modal-top"   // classe no container .modal (tema + topo)
+  modalClassName="modal-top"             // classe em .modal-dialog (topo)
+  scrollable
+>
+  <ModalHeader toggle={() => setShowResumo(false)}>
+    <span className="badge">Finalizar pedido</span>
+  </ModalHeader>
 
-              <div className="card-soft">
-                <div className="mc-h6">Seus dados</div>
-                <Row className="g-2">
-                  <Col sm="12">
-                    <label className="form-label">Nome completo</label>
-                    <input
-                      className="form-control"
-                      value={form.nome}
-                      onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                      placeholder="Seu nome"
-                    />
-                  </Col>
-                  <Col sm="12">
-                    <label className="form-label">E-mail</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      placeholder="seu@email.com"
-                    />
-                  </Col>
-                  <Col sm="12">
-                    <label className="form-label">Telefone (DDD + número)</label>
-                    <input
-                      className="form-control"
-                      value={form.tel}
-                      onChange={(e) => setForm({ ...form, tel: e.target.value })}
-                      placeholder="11999999999"
-                    />
-                  </Col>
-                </Row>
-              </div>
-            </div>
-          )}
-        </ModalBody>
-        <ModalFooter>
-          <button className="btn btn-outline-secondary btn-mobile" onClick={() => setShowResumo(false)}>
-            Voltar
-          </button>
-          <button
-            className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"} btn-mobile`}
-            onClick={() => {
-              if (!form.nome || !form.email || !form.tel) {
-                //alert("Preencha nome, e-mail e telefone.");
-                //return;
-              }
-              finalizarNoWhats();
-            }}
-            disabled={cart.count === 0}
-          >
-            Finalizar no WhatsApp
-          </button>
-        </ModalFooter>
-      </Modal>
+  <ModalBody>
+    {cart.count === 0 ? (
+      <p>Nenhuma foto selecionada.</p>
+    ) : (
+      <div className="mc-grid">
+        <div className="card-soft">
+          <div className="mc-h6">
+            Selecionadas por coreografia <span className="badge">{cart.count}</span>
+          </div>
+          <div className="sel-list">
+            {currentEvent?.coreos?.map((c) => {
+              const list = (groupedByCoreo[c.id] || []);
+              if (!list.length) return null;
+              return (
+                <div key={c.id} style={{ marginBottom: 12 }}>
+                  <div style={{ fontWeight: 700, marginBottom: 6 }}>{c.title}</div>
+                  <div style={{ display: "grid", gap: 6 }}>
+                    {list.map((name) => (
+                      <div key={name} className="sel-item">{name}</div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="total-row">
+            <div className="total-label">Valor total</div>
+            <div className="total-value">{moneyBRL(cart.totalCents)}</div>
+          </div>
+          <div className="small" style={{ marginTop: 6, textAlign: "end" }}>
+            ({moneyBRL(PRICE_PER_PHOTO)} por foto)
+          </div>
+        </div>
+
+        <div className="card-soft">
+          <div className="mc-h6">Seus dados</div>
+          <Row className="g-2">
+            <Col sm="12">
+              <label className="form-label">Nome completo</label>
+              <input
+                className="form-control"
+                value={form.nome}
+                onChange={(e) => setForm({ ...form, nome: e.target.value })}
+                placeholder="Seu nome"
+              />
+            </Col>
+            <Col sm="12">
+              <label className="form-label">E-mail</label>
+              <input
+                type="email"
+                className="form-control"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                placeholder="seu@email.com"
+              />
+            </Col>
+            <Col sm="12">
+              <label className="form-label">Telefone (DDD + número)</label>
+              <input
+                className="form-control"
+                value={form.tel}
+                onChange={(e) => setForm({ ...form, tel: e.target.value })}
+                placeholder="11999999999"
+              />
+            </Col>
+          </Row>
+        </div>
+      </div>
+    )}
+  </ModalBody>
+
+<ModalFooter className="w-100 d-flex justify-content-between">
+  <button
+    className="btn btn-outline-secondary"
+    onClick={() => setShowResumo(false)}
+  >
+    Voltar
+  </button>
+
+  <button
+    className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"}`}
+    onClick={() => {
+      // Validação opcional:
+      // if (!form.nome || !form.email || !form.tel) { alert("Preencha nome, e-mail e telefone."); return; }
+      finalizarNoWhats();
+    }}
+    disabled={cart.count === 0}
+  >
+    Finalizar
+  </button>
+</ModalFooter>
+
+</Modal>
+
+
     </>
   );
 }
