@@ -18,9 +18,18 @@ import "assets/css/galeria.css";
 /* =========================================================
    HELPERS
    ========================================================= */
-function importAll(r) {
-  return r.keys().map(r);
+/* helper: importa tudo e permite excluir por regex */
+function importAll(r, excludeRe) {
+  return r
+    .keys()
+    .filter((k) => (excludeRe ? !excludeRe.test(k) : true)) // k é tipo "./01.webp" ou "./capa.jpg"
+    .map(r);
 }
+
+/* regex para excluir capa.* (jpg|jpeg|png|webp), case-insensitive */
+const EXCLUDE_COVER = /\/?capa\.(jpg|jpeg|png|webp)$/i;
+
+
 const moneyBRL = (cents) =>
   (cents / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 function fileNameFromSrc(imgSrc) {
@@ -40,26 +49,32 @@ function fileNameFromSrc(imgSrc) {
 // Capas
 
 // Galerias (com marca d’água gerada pelo script)
+/* agora use o helper passando o EXCLUDE_COVER */
 const coreografia1Imgs = importAll(
   require.context(
     "assets/img_wm/espetaculos/novembro/coreografia_1",
     false,
     /\.(png|jpe?g|webp|gif)$/i
-  )
+  ),
+  EXCLUDE_COVER
 );
+
 const coreografia2Imgs = importAll(
   require.context(
     "assets/img_wm/espetaculos/novembro/coreografia_2",
     false,
     /\.(png|jpe?g|webp|gif)$/i
-  )
+  ),
+  EXCLUDE_COVER
 );
+
 const coreografia3Imgs = importAll(
   require.context(
     "assets/img_wm/espetaculos/novembro/coreografia_3",
     false,
     /\.(png|jpe?g|webp|gif)$/i
-  )
+  ),
+  EXCLUDE_COVER
 );
 
 /* ===================== CONFIG ===================== */
@@ -335,7 +350,7 @@ export default function Galeria() {
                     <div style={{ placeContent: "end" }} className="row w-100 m-0 mt-3">
                       <div className="col-12 col-md-3 text-end">
                         <button
-                          onClick={() => setView("events")}
+                          onClick={() => setView("event")}
                           className="btn btn-outline-secondary w-100"
                         >
                           ← Voltar
