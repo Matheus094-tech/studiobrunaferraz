@@ -4,10 +4,10 @@ import React, { useEffect, useMemo, useState } from "react";
 // layout
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footer/Footer.js";
-import coverNovembro from "assets/img/espetaculos/novembro/capa.jpg";
-import coverCoreo1 from "assets/img/espetaculos/novembro/coreografia_1/capa.jpg";
-import coverCoreo2 from "assets/img/espetaculos/novembro/coreografia_2/capa.jpg";
-import coverCoreo3 from "assets/img/espetaculos/novembro/coreografia_3/capa.jpg";
+import coverNovembro from "assets/img_wm/espetaculos/novembro/capa.jpg";
+import coverCoreo1 from "assets/img_wm/espetaculos/novembro/coreografia_1/capa.jpg";
+import coverCoreo2 from "assets/img_wm/espetaculos/novembro/coreografia_2/capa.jpg";
+import coverCoreo3 from "assets/img_wm/espetaculos/novembro/coreografia_3/capa.jpg";
 
 // modal e grid (Reactstrap)
 import { Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from "reactstrap";
