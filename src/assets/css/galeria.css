@@ -1,0 +1,48 @@
+/* ====== Studio Bruna Ferraz – Galeria (escopo local) ====== */
+#comprar-fotos {
+  --bg: #0b0b0b;
+  --panel: #0f0f0f;
+  --panel-border: #222;
+  --text: #e8e8e8;
+  --muted: #a3a3a3;
+
+  --gold-50: #fff6b0;
+  --gold-70: #f2cf74;
+  --gold-80: #e6b557;
+  --gold-90: #c8892e;
+  --gold-grad: linear-gradient(90deg, var(--gold-50), var(--gold-70), var(--gold-90));
+}
+
+/* agora todas as regras sempre prefixadas com #comprar-fotos */
+#comprar-fotos .title {
+  background: var(--gold-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+#comprar-fotos .border.rounded-3 {
+  background: var(--panel);
+  border-color: var(--panel-border) !important;
+  /* ... resto igual */
+}
+
+/* só na página de eventos */
+#comprar-fotos .wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+#comprar-fotos .main {
+  flex: 1;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}

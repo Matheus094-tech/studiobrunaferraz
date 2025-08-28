@@ -10,6 +10,7 @@ import Sobre from "views/IndexSections/sobre_mim";
 import Equipe from "views/IndexSections/equipe.js";
 import Contato from "views/IndexSections/contato"
 
+
 export default function Index() {
   React.useEffect(() => {
     document.body.classList.toggle("index-page");
@@ -30,16 +31,6 @@ export default function Index() {
         </div>
         <Footer />
       </div>
-
-      <style jsx>{`
-  @media (max-width: 600px) {
-    .wrapper {
-      margin-top: 100px;
-    }
-  }
-`}</style>
     </>
-
-
   );
 }
