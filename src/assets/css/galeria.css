@@ -1,48 +1,308 @@
-/* ====== Studio Bruna Ferraz – Galeria (escopo local) ====== */
+/* ==================== BASE + LAYOUT ==================== */
+html, body {
+  height: 100%;
+  overflow-x: hidden;            /* evita scroll lateral global */
+}
+
+body.index-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrapper, .main {
+  flex: 1 0 auto;
+  overflow-x: hidden;            /* evita estourar por filhos */
+  box-sizing: border-box;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==================== SEÇÃO PRINCIPAL ==================== */
 #comprar-fotos {
-  --bg: #0b0b0b;
-  --panel: #0f0f0f;
-  --panel-border: #222;
-  --text: #e8e8e8;
-  --muted: #a3a3a3;
-
-  --gold-50: #fff6b0;
-  --gold-70: #f2cf74;
-  --gold-80: #e6b557;
-  --gold-90: #c8892e;
-  --gold-grad: linear-gradient(90deg, var(--gold-50), var(--gold-70), var(--gold-90));
+  padding-top: 100px;            /* espaço abaixo do Navbar */
+  overflow-x: hidden;            /* garante sem rolagem lateral */
 }
 
-/* agora todas as regras sempre prefixadas com #comprar-fotos */
-#comprar-fotos .title {
-  background: var(--gold-grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+#comprar-fotos h2.title {
+  color: #e6b557;
+  font-weight: 800;
 }
 
-#comprar-fotos .border.rounded-3 {
-  background: var(--panel);
-  border-color: var(--panel-border) !important;
-  /* ... resto igual */
+/* ==================== BOTÕES (tema) ==================== */
+#comprar-fotos .btn-success {
+  background: #e6b557;
+  border: none;
+  color: #171941;
+  font-weight: 700;
+  border-radius: 10px;
+}
+#comprar-fotos .btn-success:hover {
+  background: #f2cf74;
+  color: #171941;
 }
 
-/* só na página de eventos */
-#comprar-fotos .wrapper {
-  min-height: 100vh;
+#comprar-fotos .btn-outline-secondary {
+  border: 1px solid #e6b557;
+  color: #e6b557;
+  background: transparent;
+  border-radius: 10px;
+}
+#comprar-fotos .btn-outline-secondary:hover {
+  background: #e6b557;
+  color: #171941;
+}
+
+/* ===== utilitários responsivos ===== */
+.btn-mobile { width: 100%; max-width: 100%; }
+.bar-stack   { width: 100%; }
+.bar-stack > * { max-width: 100%; }
+
+/* ==================== BADGES ==================== */
+#comprar-fotos .badge {
+  background: #171941;
+  border: 1px solid #2c2f55;
+  color: #e6b557;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+/* ==================== CARDS (eventos + coreografias) ==================== */
+#comprar-fotos .p-3.border.rounded-3 {
+  background: #171941;                /* único azul do site */
+  border: 1px solid #2c2f55;
+  border-radius: 16px;
+  color: #fff;
+  transition: transform 0.15s ease;
+  box-sizing: border-box;             /* evita estourar pelo padding */
+}
+#comprar-fotos .p-3.border.rounded-3:hover {
+  transform: translateY(-4px);
+}
+
+#comprar-fotos h5,
+#comprar-fotos h6 {
+  color: #e6b557;
+  font-weight: 700;
+}
+#comprar-fotos .text-muted {
+  color: #c5c5c5 !important;
+}
+
+/* ==================== GRIDS (seguros no mobile) ==================== */
+/* use junto do inline grid-template, mas com minmax(0,1fr) */
+.grid-xs-1 {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(0, 1fr)); /* evita overflow */
+}
+
+/* ==================== THUMBS (galeria de fotos) ==================== */
+#comprar-fotos .thumb {
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #2c2f55;
+  border-radius: 12px;
+  background: #171941;
+  overflow: hidden;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  box-sizing: border-box;
+}
+#comprar-fotos .thumb:hover {
+  transform: scale(1.02);
+}
+#comprar-fotos .thumb img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+#comprar-fotos .thumb.is-selected {
+  border-color: #e6b557;
+  box-shadow: 0 0 0 2px #e6b557 inset;
+}
+
+#comprar-fotos .thumb-label {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(23,25,65,0.92);
+  color: #e6b557;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+#comprar-fotos .thumb .check {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  background: #e6b557;
+  color: #171941;
+  font-weight: 800;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
-}
-#comprar-fotos .main {
-  flex: 1;
+  align-items: center;
+  justify-content: center;
 }
 
-.wrapper {
-  min-height: 100vh;
+/* ==================== MODAL DE CHECKOUT (tema do site) ==================== */
+body.index-page.modal-open .modal-backdrop.show {
+  background-color: rgba(0,0,0,.85);
+}
+
+body.index-page .modal-checkout .modal-content {
+  background: #171941;                 /* azul único */
+  color: #f2f2f2;
+  border: 1px solid #2c2f55;
+  border-radius: 20px;
+  overflow: hidden;
+}
+body.index-page .modal-checkout .modal-header {
+  border: 0;
+  padding: 18px 20px 0;
+  color: #e6b557;
+}
+body.index-page .modal-checkout .modal-title {
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+body.index-page .modal-checkout .modal-body {
+  padding: 10px 16px 0;
+}
+
+/* cartões internos no modal (mesmo azul) */
+body.index-page .modal-checkout .card-soft {
+  background: #171941;                 /* removido azul mais claro */
+  border: 1px solid #2c2f55;
+  border-radius: 16px;
+  padding: 14px;
+}
+
+body.index-page .modal-checkout .mc-h6 {
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0 0 10px 0;
+  display: flex; align-items: center; gap: 8px;
+  color: #e6b557;
+}
+body.index-page .modal-checkout .badge {
+  background: #171941;
+  border: 1px solid #2c2f55;
+  color: #e6e6e6;
+}
+
+/* lista de fotos selecionadas */
+body.index-page .modal-checkout .sel-list {
+  max-height: 260px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+body.index-page .modal-checkout .sel-item {
+  font-size: 13px;
+  color: #ddd;
+  padding: 6px 10px;
+  border: 1px dashed #2c2f55;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+}
+
+/* formulário */
+body.index-page .modal-checkout .form-label {
+  color: #e6b557;
+  font-weight: 700;
+  font-size: 13px;
+}
+body.index-page .modal-checkout .form-control {
+  background: #171941;
+  border: 1px solid #2c2f55;
+  color: #fff;
+  border-radius: 12px;
+  min-height: 46px;
+}
+body.index-page .modal-checkout .form-control::placeholder {
+  color: #9a9a9a;
+}
+
+/* total */
+body.index-page .modal-checkout .total-row {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #171941;
+  border: 1px solid #2c2f55;
+  margin-top: 8px;
+}
+body.index-page .modal-checkout .total-label { color: #e6e6e6; }
+body.index-page .modal-checkout .total-value {
+  color: #e6b557;
+  font-weight: 900;
+  font-size: 18px;
 }
 
-.main {
-  flex: 1;
+/* footer do modal (fixo e responsivo) */
+body.index-page .modal-checkout .modal-footer {
+  border: 0;
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(23,25,65,0) 0%, #171941 40%, #171941 100%);
+  padding-top: 12px;
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+
+/* botões dentro do modal */
+body.index-page .modal-checkout .btn-success {
+  border: 1px solid #e6b557;
+  background: linear-gradient(90deg,#fff6b0,#e6b557);
+  color: #171941;
+  font-weight: 800;
+  border-radius: 12px;
+  min-height: 46px;
+}
+body.index-page .modal-checkout .btn-outline-secondary {
+  border: 1px solid #e6b557;
+  color: #e6b557;
+  border-radius: 12px;
+  min-height: 46px;
+}
+
+/* ==================== MOBILE FIXES ==================== */
+@media (max-width: 576px) {
+  #comprar-fotos .container {
+    padding-left: 12px;
+    padding-right: 12px;
+    overflow-x: hidden;
+  }
+
+  /* grids em 1 coluna e seguras */
+  .grid-xs-1 {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* barras de ação empilhadas e sem overflow */
+  .bar-stack {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  /* botões ocupam a largura e quebram texto longo */
+  .btn-mobile {
+    width: 100% !important;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  #comprar-fotos .thumb img {
+    height: 150px; /* thumbnails menores no XS */
+  }
 }

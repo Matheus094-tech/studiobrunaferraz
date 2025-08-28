@@ -1,1 +1,7 @@
+# --- CANÔNICO: força sempre o www + HTTPS ---
+https://studiobrunaferraz.com.br/*     https://www.studiobrunaferraz.com.br/:splat   301!
+http://studiobrunaferraz.com.br/*      https://www.studiobrunaferraz.com.br/:splat   301!
+http://www.studiobrunaferraz.com.br/*  https://www.studiobrunaferraz.com.br/:splat   301!
+
+# --- SPA: qualquer rota que não exista vira index.html ---
 /*  /index.html  200

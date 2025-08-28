@@ -3,89 +3,92 @@ import React, { useEffect, useMemo, useState } from "react";
 
 // layout
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-// import PageHeader from "components/PageHeader/PageHeader.js"; // opcional
 import Footer from "components/Footer/Footer.js";
+import coverNovembro from "assets/img/espetaculos/novembro/capa.jpg";
+import coverCoreo1 from "assets/img/espetaculos/novembro/coreografia_1/capa.jpg";
+import coverCoreo2 from "assets/img/espetaculos/novembro/coreografia_2/capa.jpg";
+import coverCoreo3 from "assets/img/espetaculos/novembro/coreografia_3/capa.jpg";
 
-// modal e grid (Bootstrap/Reactstrap)
+// modal e grid (Reactstrap)
 import { Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from "reactstrap";
 
 // css escopado da galeria
 import "assets/css/galeria.css";
 
 /* =========================================================
-   HELPER: importa todas as imagens de uma pasta (webpack)
+   HELPERS
    ========================================================= */
 function importAll(r) {
   return r.keys().map(r);
 }
+const moneyBRL = (cents) =>
+  (cents / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+function fileNameFromSrc(imgSrc) {
+  try {
+    const parts = imgSrc.split("/");
+    return decodeURIComponent(parts[parts.length - 1]);
+  } catch {
+    return String(imgSrc);
+  }
+}
 
-// Carrega imagens das 3 coreografias (como você pediu)
+/* =========================================================
+   IMPORTS DE IMAGENS
+   - Galeria usa IMAGENS MARCADAS (img_wm)
+   - Capas são imagens “limpas” (opcional)
+   ========================================================= */
+// Capas
+
+// Galerias (com marca d’água gerada pelo script)
 const coreografia1Imgs = importAll(
   require.context(
-    "assets/img/espetaculos/novembro/coreografia_1",
+    "assets/img_wm/espetaculos/novembro/coreografia_1",
     false,
     /\.(png|jpe?g|webp|gif)$/i
   )
 );
 const coreografia2Imgs = importAll(
   require.context(
-    "assets/img/espetaculos/novembro/coreografia_2",
+    "assets/img_wm/espetaculos/novembro/coreografia_2",
     false,
     /\.(png|jpe?g|webp|gif)$/i
   )
 );
 const coreografia3Imgs = importAll(
   require.context(
-    "assets/img/espetaculos/novembro/coreografia_3",
+    "assets/img_wm/espetaculos/novembro/coreografia_3",
     false,
     /\.(png|jpe?g|webp|gif)$/i
   )
 );
 
-// (opcional) capa do evento
-let coverNovembro;
-try {
-  coverNovembro = require("assets/img/espetaculos/novembro/cover.webp");
-} catch {
-  coverNovembro = null;
-}
-
 /* ===================== CONFIG ===================== */
 const WHATSAPP_NUMBER = "5511991502640"; // DDI+DDD+número
-const PRICE_PER_PHOTO = 1500; // em centavos (R$ 15,00)
-const moneyBRL = (cents) =>
-  (cents / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-
-/* Utils */
-function fileNameFromSrc(imgSrc) {
-  try {
-    const parts = imgSrc.split("/");
-    return decodeURIComponent(parts[parts.length - 1]); // ex: "01.webp"
-  } catch {
-    return String(imgSrc);
-  }
-}
+const PRICE_PER_PHOTO = 2000; // em centavos (R$ 15,00)
 
 /* ===================== DADOS (EVENTS) ===================== */
 const EVENTS = [
   {
     id: "esp-novembro",
-    title: "Espetáculo XPTO - Novembro",
-    cover: coverNovembro,
+    title: "Espetáculo 01",
+    cover: coverNovembro, // capa do evento
     coreos: [
       {
         id: "esp-novembro-coreo-01",
-        title: "COREOGRAFIA 01 - XPTO",
+        title: "COREOGRAFIA 01 - Baby class",
+        cover: coverCoreo1, // capa da coreografia
         images: coreografia1Imgs,
       },
       {
         id: "esp-novembro-coreo-02",
-        title: "COREOGRAFIA 02 - XPTO",
+        title: "COREOGRAFIA 02 - Adulto",
+        cover: coverCoreo2,
         images: coreografia2Imgs,
       },
       {
-        id: "esp-novembro-coreo-03", // <- corrigido p/ ser único
-        title: "COREOGRAFIA 03 - XPTO",
+        id: "esp-novembro-coreo-03",
+        title: "COREOGRAFIA 03 - Jazz",
+        cover: coverCoreo3,
         images: coreografia3Imgs,
       },
     ],
@@ -109,7 +112,6 @@ function useLocalCartByEvent(eventId, priceCents) {
 
   const toggle = (id) =>
     setItems((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
-
   const clear = () => setItems([]);
 
   return {
@@ -123,7 +125,6 @@ function useLocalCartByEvent(eventId, priceCents) {
 
 /* ===================== COMPONENTE ===================== */
 export default function Galeria() {
-  // mesmo comportamento do Index (classe no body)
   useEffect(() => {
     document.body.classList.toggle("index-page");
     return () => document.body.classList.toggle("index-page");
@@ -148,7 +149,7 @@ export default function Galeria() {
   // Carrinho POR evento
   const cart = useLocalCartByEvent(eventId, PRICE_PER_PHOTO);
 
-  // Modal resumo
+  // Modal resumo + contato
   const [showResumo, setShowResumo] = useState(false);
   const [form, setForm] = useState({ nome: "", email: "", tel: "" });
 
@@ -183,22 +184,25 @@ export default function Galeria() {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
+  const TotalStrong = ({ value }) => (
+    <span style={{ color: "#e6b557", fontWeight: 800, fontSize: 18 }}>{value}</span>
+  );
+
   return (
     <>
       <IndexNavbar />
       <div className="wrapper">
-        {/* <PageHeader /> */}
-
         <div className="main">
           <div className="section" id="comprar-fotos">
             <div className="container">
               <h2 className="text-center title" style={{ marginBottom: 24 }}>
-                Comprar Fotos
+                Galeria
               </h2>
 
               {/* ==== LISTA DE EVENTOS ==== */}
               {view === "events" && (
                 <div
+                  className="grid-xs-1"
                   style={{
                     display: "grid",
                     gap: 16,
@@ -215,7 +219,6 @@ export default function Galeria() {
                           style={{ width: "100%", height: 160, objectFit: "cover" }}
                         />
                       )}
-
                       <h5 className="mb-2">{ev.title}</h5>
                       <p className="text-muted small mb-3">
                         {ev.coreos?.length ?? 0} coreografia(s)
@@ -226,7 +229,7 @@ export default function Galeria() {
                           setCoreoId(ev.coreos?.[0]?.id ?? null);
                           setView("event");
                         }}
-                        className="btn btn-success"
+                        className="btn btn-success btn-mobile"
                       >
                         Abrir evento
                       </button>
@@ -238,7 +241,9 @@ export default function Galeria() {
               {/* ==== COREOGRAFIAS DO EVENTO ==== */}
               {view === "event" && currentEvent && (
                 <div style={{ marginTop: 16 }}>
+                  {/* Top bar */}
                   <div
+                    className="bar-stack"
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -246,46 +251,32 @@ export default function Galeria() {
                       flexWrap: "wrap",
                     }}
                   >
-                    <button onClick={() => setView("events")} className="btn btn-outline-secondary">
-                      ← Voltar
-                    </button>
+                    <div style={{ placeContent: "end" }} className="row w-100 m-0 mt-3">
+                      <div className="col-12 col-md-3 text-end">
+                        <button
+                          onClick={() => setView("events")}
+                          className="btn btn-outline-secondary w-100"
+                        >
+                          ← Voltar
+                        </button>
+                      </div>
+                    </div>
 
                     <h3 style={{ margin: 0 }}>{currentEvent.title}</h3>
 
-                    {/* Barra de ação do EVENTO */}
-                    <div
-                      style={{
-                        marginLeft: "auto",
-                        display: "flex",
-                        gap: 12,
-                        alignItems: "center",
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      <button onClick={cart.clear} className="btn btn-outline-secondary">
+                    <div style={{ marginLeft: "auto", display: "flex", gap: 12, alignItems: "center" }}>
+                      <button onClick={cart.clear} className="btn btn-outline-secondary btn-mobile">
                         Limpar seleção do evento
                       </button>
                       <span className="badge" style={{ borderRadius: 999, padding: "6px 12px" }}>
                         Selecionadas: {cart.count}
                       </span>
-                      <span style={{ fontWeight: 600 }}>Total: {moneyBRL(cart.totalCents)}</span>
-                      <button
-                        className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"}`}
-                        onClick={() => setShowResumo(true)}
-                        disabled={cart.count === 0}
-                        title={
-                          cart.count === 0
-                            ? "Selecione fotos nas coreografias para finalizar"
-                            : "Ver resumo e finalizar"
-                        }
-                      >
-                        Finalizar
-                      </button>
                     </div>
                   </div>
 
-                  {/* grid de coreografias */}
+                  {/* Grid de coreografias (com capa) */}
                   <div
+                    className="grid-xs-1"
                     style={{
                       display: "grid",
                       gap: 16,
@@ -295,21 +286,44 @@ export default function Galeria() {
                   >
                     {currentEvent.coreos?.map((c) => (
                       <div key={c.id} className="p-3 border rounded-3 h-100">
+                        {c.cover && (
+                          <img
+                            src={c.cover}
+                            alt={c.title}
+                            className="rounded-3 mb-2"
+                            style={{ width: "100%", height: 160, objectFit: "cover" }}
+                          />
+                        )}
                         <h6 className="mb-2">{c.title}</h6>
                         <p className="text-muted small mb-3">{c.images?.length ?? 0} fotos</p>
-                        <div style={{ display: "flex", gap: 8 }}>
-                          <button
-                            onClick={() => {
-                              setCoreoId(c.id);
-                              setView("coreo");
-                            }}
-                            className="btn btn-success"
-                          >
-                            Ver fotos
-                          </button>
-                        </div>
+                        <button
+                          onClick={() => {
+                            setCoreoId(c.id);
+                            setView("coreo");
+                          }}
+                          className="btn btn-success btn-mobile"
+                        >
+                          Ver fotos
+                        </button>
                       </div>
                     ))}
+                  </div>
+
+                  {/* Barra inferior: Total + Voltar + Finalizar */}
+                  <div className="row w-100 m-0 mt-3 align-items-center">
+                    <div className="col-6 col-md-3 ms-auto">
+                      <div style={{ textAlign: "end" }} className="row w-100 m-0 mt-3 align-items-center">
+                        <TotalStrong value={`Total: ${moneyBRL(cart.totalCents)}`} />
+                        <button
+                          className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"} w-100`}
+                          onClick={() => setShowResumo(true)}
+                          disabled={cart.count === 0}
+                        >
+                          Finalizar
+                        </button>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
               )}
@@ -317,45 +331,35 @@ export default function Galeria() {
               {/* ==== GALERIA DA COREOGRAFIA ==== */}
               {view === "coreo" && currentCoreo && (
                 <div style={{ marginTop: 16 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <button onClick={() => setView("event")} className="btn btn-outline-secondary">
-                      ← {currentEvent?.title}
-                    </button>
-                    <h4 style={{ margin: 0 }}>{currentCoreo.title}</h4>
-                    <span
-                      className="badge"
-                      style={{ marginLeft: "auto", borderRadius: 999, padding: "6px 12px" }}
-                    >
-                      Selecionadas: {cart.count}
-                    </span>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: 8,
-                      flexWrap: "wrap",
-                      marginTop: 12,
-                      alignItems: "center",
-                    }}
-                  >
-                    <button onClick={cart.clear} className="btn btn-outline-secondary">
-                      Limpar seleção do evento
-                    </button>
-                    <div style={{ marginLeft: "auto", fontWeight: 600 }}>
-                      Total: {moneyBRL(cart.totalCents)}{" "}
-                      <span className="text-muted">({moneyBRL(PRICE_PER_PHOTO)} cada)</span>
+                  {/* Top bar */}
+                    <div style={{ placeContent: "end" }} className="row w-100 m-0 mt-3">
+                      <div className="col-12 col-md-3 text-end">
+                        <button
+                          onClick={() => setView("events")}
+                          className="btn btn-outline-secondary w-100"
+                        >
+                          ← Voltar
+                        </button>
+                      </div>
                     </div>
-                    <button
-                      className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"}`}
-                      onClick={() => setShowResumo(true)}
-                      disabled={cart.count === 0}
-                    >
-                      Finalizar
-                    </button>
+
+
+                  <div className="bar-stack" style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <h4 style={{ margin: 0 }}>{currentCoreo.title}</h4>
+
+                    <div style={{ marginLeft: "auto", display: "flex", gap: 12, alignItems: "center" }}>
+                      <button onClick={cart.clear} className="btn btn-outline-secondary btn-mobile">
+                        Limpar seleção do evento
+                      </button>
+                      <span className="badge" style={{ borderRadius: 999, padding: "6px 12px" }}>
+                        Selecionadas: {cart.count}
+                      </span>
+                    </div>
                   </div>
 
+                  {/* Grid de fotos */}
                   <div
+                    className="grid-xs-1"
                     style={{
                       display: "grid",
                       gap: 12,
@@ -365,17 +369,13 @@ export default function Galeria() {
                   >
                     {currentCoreo.images?.map((imgSrc) => {
                       const file = fileNameFromSrc(imgSrc);
-                      const composedId = `${currentCoreo.id}::${file}`; // único por evento
+                      const composedId = `${currentCoreo.id}::${file}`;
                       const selected = cart.items.includes(composedId);
                       return (
                         <div
                           key={composedId}
                           onClick={() => cart.toggle(composedId)}
                           className={`thumb border rounded-3 ${selected ? "is-selected" : ""}`}
-                          style={{
-                            borderColor: selected ? "#e6b557" : undefined,
-                            boxShadow: selected ? "0 0 0 1px #e6b557 inset" : undefined,
-                          }}
                         >
                           <span className="thumb-label">{file}</span>
                           <img alt={file} loading="lazy" src={imgSrc} />
@@ -383,6 +383,32 @@ export default function Galeria() {
                         </div>
                       );
                     })}
+                  </div>
+
+                  {/* Barra inferior: Total + Finalizar */}
+                  <div
+                    className="bar-stack"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      justifyContent: "flex-end",
+                      marginTop: 16,
+                    }}
+                  >
+                    <div className="col-6 col-md-3 ms-auto">
+                      <div style={{ textAlign: "end" }} className="row w-100 m-0 mt-3 align-items-center">
+                        <TotalStrong value={`Total: ${moneyBRL(cart.totalCents)}`} />
+                        <button
+                          className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"} w-100`}
+                          onClick={() => setShowResumo(true)}
+                          disabled={cart.count === 0}
+                        >
+                          Finalizar
+                        </button>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
               )}
@@ -400,90 +426,88 @@ export default function Galeria() {
       </div>
 
       {/* ===== MODAL DE RESUMO DETALHADO ===== */}
-      <Modal isOpen={showResumo} toggle={() => setShowResumo(false)}>
-        <ModalHeader toggle={() => setShowResumo(false)}>Resumo do pedido</ModalHeader>
+      <Modal className="modal-checkout" isOpen={showResumo} toggle={() => setShowResumo(false)}>
+        <ModalHeader toggle={() => setShowResumo(false)}><span className="badge">Finalizar pedido</span></ModalHeader>
         <ModalBody>
           {cart.count === 0 ? (
             <p>Nenhuma foto selecionada.</p>
           ) : (
-            <>
-              <p className="mb-2">
-                <strong>Evento:</strong> {currentEvent?.title}
-              </p>
+            <div className="mc-grid">
+              <div className="card-soft">
+                <div className="mc-h6">
+                  Selecionadas por coreografia <span className="badge">{cart.count}</span>
+                </div>
+                <div className="sel-list">
+                  {currentEvent?.coreos?.map((c) => {
+                    const list = (groupedByCoreo[c.id] || []);
+                    if (!list.length) return null;
+                    return (
+                      <div key={c.id} style={{ marginBottom: 12 }}>
+                        <div style={{ fontWeight: 700, marginBottom: 6 }}>{c.title}</div>
+                        <div style={{ display: "grid", gap: 6 }}>
+                          {list.map((name) => (
+                            <div key={name} className="sel-item">{name}</div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="total-row">
+                  <div className="total-label">Valor total</div>
+                  <div className="total-value">{moneyBRL(cart.totalCents)}</div>
+                </div>
+                <div className="text-muted small" style={{ marginTop: 6 }}>
+                  ({moneyBRL(PRICE_PER_PHOTO)} por foto)
+                </div>
+              </div>
 
-              {/* Listagem por coreografia */}
-              {currentEvent?.coreos?.map((c) => {
-                const list = groupedByCoreo[c.id] || [];
-                if (!list.length) return null;
-                return (
-                  <div key={c.id} className="mb-3">
-                    <div className="d-flex align-items-center">
-                      <h6 className="m-0">{c.title}</h6>
-                      <span className="badge ms-2">{list.length}</span>
-                    </div>
-                    <p className="text-muted small" style={{ wordBreak: "break-word" }}>
-                      {list.join(", ")}
-                    </p>
-                  </div>
-                );
-              })}
-
-              <Row className="mb-3">
-                <Col sm="12">
-                  <div className="d-flex align-items-center gap-2">
-                    <strong>Total de fotos:</strong> {cart.count}
-                  </div>
-                  <div>
-                    <strong>Valor total:</strong> {moneyBRL(cart.totalCents)}{" "}
-                    <span className="text-muted">({moneyBRL(PRICE_PER_PHOTO)} cada)</span>
-                  </div>
-                </Col>
-              </Row>
-
-              {/* Formulário simples de contato */}
-              <Row className="g-2">
-                <Col sm="12">
-                  <label className="form-label">Nome completo</label>
-                  <input
-                    className="form-control"
-                    value={form.nome}
-                    onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                    placeholder="Seu nome"
-                  />
-                </Col>
-                <Col sm="12">
-                  <label className="form-label">E-mail</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="seu@email.com"
-                  />
-                </Col>
-                <Col sm="12">
-                  <label className="form-label">Telefone (DDD + número)</label>
-                  <input
-                    className="form-control"
-                    value={form.tel}
-                    onChange={(e) => setForm({ ...form, tel: e.target.value })}
-                    placeholder="11999999999"
-                  />
-                </Col>
-              </Row>
-            </>
+              <div className="card-soft">
+                <div className="mc-h6">Seus dados</div>
+                <Row className="g-2">
+                  <Col sm="12">
+                    <label className="form-label">Nome completo</label>
+                    <input
+                      className="form-control"
+                      value={form.nome}
+                      onChange={(e) => setForm({ ...form, nome: e.target.value })}
+                      placeholder="Seu nome"
+                    />
+                  </Col>
+                  <Col sm="12">
+                    <label className="form-label">E-mail</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="seu@email.com"
+                    />
+                  </Col>
+                  <Col sm="12">
+                    <label className="form-label">Telefone (DDD + número)</label>
+                    <input
+                      className="form-control"
+                      value={form.tel}
+                      onChange={(e) => setForm({ ...form, tel: e.target.value })}
+                      placeholder="11999999999"
+                    />
+                  </Col>
+                </Row>
+              </div>
+            </div>
           )}
         </ModalBody>
         <ModalFooter>
-          <button className="btn btn-outline-secondary" onClick={() => setShowResumo(false)}>
+          <button className="btn btn-outline-secondary btn-mobile" onClick={() => setShowResumo(false)}>
             Voltar
           </button>
           <button
-            className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"}`}
+            className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"} btn-mobile`}
             onClick={() => {
               if (!form.nome || !form.email || !form.tel) {
-                alert("Preencha nome, e-mail e telefone.");
-                return;
+                //alert("Preencha nome, e-mail e telefone.");
+                //return;
               }
               finalizarNoWhats();
             }}

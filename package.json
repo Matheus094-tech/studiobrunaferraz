@@ -57,7 +57,8 @@
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile-sass": "sass /src/assets/scss/blk-design-system-react.scss /src/assets/css/blk-design-system-react.css",
-    "minify-sass": "sass /src/assets/scss/blk-design-system-react.scss /src/assets/css/blk-design-system-react.min.css --style compressed"
+    "minify-sass": "sass /src/assets/scss/blk-design-system-react.scss /src/assets/css/blk-design-system-react.min.css --style compressed",
+    "wm": "node scripts/watermark.js"
   },
   "eslintConfig": {
     "extends": [
@@ -83,7 +84,9 @@
     ]
   },
   "devDependencies": {
+    "globby": "^14.1.0",
     "sass": "~1.32.13",
-    "sass-loader": "~14.1.0"
+    "sass-loader": "~14.1.0",
+    "sharp": "^0.34.3"
   }
 }

@@ -1,0 +1,29 @@
+# HTML principal: sem cache (sempre pega o bundle mais novo)
+#/index.html é o caminho que Netlify serve na raiz
+/index.html
+  Cache-Control: no-cache, no-store, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=()
+  X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Bundles gerados (com hash no nome) — cache forte
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# fallback para quaisquer JS/CSS na raiz do build
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Imagens públicas (ajuste se usar outra pasta pública)
+# Se suas imagens finais ficam em /assets/img/* no build:
+# descomente este bloco. Se não usar, pode ignorar.
+#/assets/img/*
+#  Cache-Control: public, max-age=31536000, immutable
+
+# Fontes (se houver)
+/*/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
