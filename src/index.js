@@ -9,10 +9,10 @@ import "assets/demo/demo.css";
 import Index from "views/Index.js";
 import Galeria from "./views/paginas/galeria.jsx";
 
-  console.log = function () {};
-  console.warn = function () {};
-  console.error = function () {};
-  console.info = function () {};
+console.log = function () { };
+console.warn = function () { };
+console.error = function () { };
+console.info = function () { };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

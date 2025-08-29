@@ -1,7 +1,9 @@
 /* ==================== SEÇÃO PRINCIPAL (escopo) ==================== */
 #comprar-fotos {
-  padding-top: 100px;            /* espaço abaixo do Navbar */
-  overflow-x: hidden;            /* sem rolagem lateral horizontal */
+  padding-top: 100px;
+  /* espaço abaixo do Navbar */
+  overflow-x: hidden;
+  /* sem rolagem lateral horizontal */
 }
 
 #comprar-fotos h2.title {
@@ -17,6 +19,7 @@
   font-weight: 700;
   border-radius: 10px;
 }
+
 #comprar-fotos .btn-success:hover {
   background: #f2cf74;
   color: #171941;
@@ -28,6 +31,7 @@
   background: transparent;
   border-radius: 10px;
 }
+
 #comprar-fotos .btn-outline-secondary:hover {
   background: #e6b557;
   color: #171941;
@@ -42,6 +46,7 @@
   font-weight: 700;
   border-radius: 10px;
 }
+
 .modal-viewer .btn-success:hover,
 .modal-checkout .btn-success:hover {
   background: #f2cf74;
@@ -55,6 +60,7 @@
   background: transparent;
   border-radius: 10px;
 }
+
 .modal-viewer .btn-outline-secondary:hover,
 .modal-checkout .btn-outline-secondary:hover {
   background: #e6b557;
@@ -62,9 +68,18 @@
 }
 
 /* ===== utilitários responsivos restritos ao escopo ===== */
-#comprar-fotos .btn-mobile { width: 100%; max-width: 100%; }
-#comprar-fotos .bar-stack   { width: 100%; }
-#comprar-fotos .bar-stack > * { max-width: 100%; }
+#comprar-fotos .btn-mobile {
+  width: 100%;
+  max-width: 100%;
+}
+
+#comprar-fotos .bar-stack {
+  width: 100%;
+}
+
+#comprar-fotos .bar-stack>* {
+  max-width: 100%;
+}
 
 /* ==================== BADGES ==================== */
 #comprar-fotos .badge {
@@ -84,6 +99,7 @@
   transition: transform 0.15s ease;
   box-sizing: border-box;
 }
+
 #comprar-fotos .p-3.border.rounded-3:hover {
   transform: translateY(-4px);
 }
@@ -93,6 +109,7 @@
   color: #e6b557;
   font-weight: 700;
 }
+
 #comprar-fotos .text-muted {
   color: #c5c5c5 !important;
 }
@@ -101,7 +118,8 @@
 #comprar-fotos .grid-xs-1 {
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(auto-fill, minmax(0, 1fr)); /* evita overflow */
+  grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
+  /* evita overflow */
 }
 
 /* ==================== THUMBS (galeria de fotos) ==================== */
@@ -115,9 +133,11 @@
   transition: transform 0.1s ease, box-shadow 0.1s ease;
   box-sizing: border-box;
 }
+
 #comprar-fotos .thumb:hover {
   transform: scale(1.02);
 }
+
 #comprar-fotos .thumb img {
   width: 100%;
   height: 180px;
@@ -134,7 +154,7 @@
   position: absolute;
   top: 6px;
   left: 6px;
-  background: rgba(23,25,65,0.92);
+  background: rgba(23, 25, 65, 0.92);
   color: #e6b557;
   font-size: 12px;
   padding: 2px 6px;
@@ -158,7 +178,7 @@
 
 /* ==================== MODAIS – BACKDROP E TEMA ==================== */
 body.index-page.modal-open .modal-backdrop.show {
-  background-color: rgba(0,0,0,.85);
+  background-color: rgba(0, 0, 0, .85);
 }
 
 /* Checkout tematizado (apenas quando usa a classe .modal-checkout) */
@@ -169,15 +189,18 @@ body.index-page.modal-open .modal-backdrop.show {
   border-radius: 20px;
   overflow: hidden;
 }
+
 .modal-checkout .modal-header {
   border: 0;
   padding: 18px 20px 0;
   color: #e6b557;
 }
+
 .modal-checkout .modal-title {
   font-weight: 800;
   letter-spacing: .3px;
 }
+
 .modal-checkout .modal-body {
   padding: 10px 16px 0;
 }
@@ -194,9 +217,12 @@ body.index-page.modal-open .modal-backdrop.show {
   font-size: 14px;
   font-weight: 800;
   margin: 0 0 10px 0;
-  display: flex; align-items: center; gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: #e6b557;
 }
+
 .modal-checkout .badge {
   background: #171941;
   border: 1px solid #2c2f55;
@@ -209,13 +235,14 @@ body.index-page.modal-open .modal-backdrop.show {
   overflow: auto;
   scrollbar-width: thin;
 }
+
 .modal-checkout .sel-item {
   font-size: 13px;
   color: #ddd;
   padding: 6px 10px;
   border: 1px dashed #2c2f55;
   border-radius: 10px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* formulário */
@@ -224,6 +251,7 @@ body.index-page.modal-open .modal-backdrop.show {
   font-weight: 700;
   font-size: 13px;
 }
+
 .modal-checkout .form-control {
   background: #171941;
   border: 1px solid #2c2f55;
@@ -231,6 +259,7 @@ body.index-page.modal-open .modal-backdrop.show {
   border-radius: 12px;
   min-height: 46px;
 }
+
 .modal-checkout .form-control::placeholder {
   color: #9a9a9a;
 }
@@ -246,7 +275,11 @@ body.index-page.modal-open .modal-backdrop.show {
   border: 1px solid #2c2f55;
   margin-top: 8px;
 }
-.modal-checkout .total-label { color: #e6e6e6; }
+
+.modal-checkout .total-label {
+  color: #e6e6e6;
+}
+
 .modal-checkout .total-value {
   color: #e6b557;
   font-weight: 900;
@@ -258,20 +291,23 @@ body.index-page.modal-open .modal-backdrop.show {
   border: 0;
   position: sticky;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(23,25,65,0) 0%, #171941 40%, #171941 100%);
+  background: linear-gradient(180deg, rgba(23, 25, 65, 0) 0%, #171941 40%, #171941 100%);
   padding-top: 12px;
-  display: flex; gap: 10px; flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 /* botões dentro do modal de checkout */
 .modal-checkout .btn-success {
   border: 1px solid #e6b557;
-  background: linear-gradient(90deg,#fff6b0,#e6b557);
+  background: linear-gradient(90deg, #fff6b0, #e6b557);
   color: #171941;
   font-weight: 800;
   border-radius: 12px;
   min-height: 46px;
 }
+
 .modal-checkout .btn-outline-secondary {
   border: 1px solid #e6b557;
   color: #e6b557;
@@ -284,7 +320,7 @@ body.index-page.modal-open .modal-backdrop.show {
   border-radius: 16px;
   overflow: hidden;
   background: #111;
-  border: 1px solid rgba(255,255,255,.06);
+  border: 1px solid rgba(255, 255, 255, .06);
 }
 
 .viewer-img-wrap {
@@ -313,7 +349,7 @@ body.index-page.modal-open .modal-backdrop.show {
   height: 56px;
   border-radius: 50%;
   border: none;
-  background: rgba(0,0,0,.45);
+  background: rgba(0, 0, 0, .45);
   color: #fff;
   display: grid;
   place-items: center;
@@ -321,15 +357,23 @@ body.index-page.modal-open .modal-backdrop.show {
   transition: background .15s ease, transform .15s ease;
   user-select: none;
 }
+
 .viewer-nav:hover {
-  background: rgba(0,0,0,.65);
+  background: rgba(0, 0, 0, .65);
   transform: translateY(-50%) scale(1.04);
 }
+
 .viewer-nav:active {
   transform: translateY(-50%) scale(0.98);
 }
-.viewer-nav-left { left: 12px; }
-.viewer-nav-right { right: 12px; }
+
+.viewer-nav-left {
+  left: 12px;
+}
+
+.viewer-nav-right {
+  right: 12px;
+}
 
 .viewer-arrow {
   font-size: 34px;
@@ -340,19 +384,24 @@ body.index-page.modal-open .modal-backdrop.show {
 /* ==================== MODAL NO TOPO (somente quando usa .modal-top) ==================== */
 .modal.modal-top .modal-dialog,
 .modal-dialog.modal-top {
-  margin: 8px auto !important;   /* topo com respiro */
-  transform: none !important;    /* previne translateY de temas */
+  margin: 8px auto !important;
+  /* topo com respiro */
+  transform: none !important;
+  /* previne translateY de temas */
 }
+
 .modal.modal-top .modal-dialog.modal-dialog-centered,
 .modal-dialog.modal-top.modal-dialog-centered {
   align-items: stretch !important;
 }
+
 .modal.modal-top .modal-content,
 .modal-dialog.modal-top .modal-content {
   max-height: none !important;
   margin-top: 0 !important;
   overflow: visible !important;
 }
+
 .modal.modal-top {
   padding-top: 0 !important;
 }
@@ -383,7 +432,25 @@ body.index-page.modal-open .modal-backdrop.show {
   }
 
   #comprar-fotos .thumb img {
-    height: 150px; /* thumbnails menores no XS */
+    height: 150px;
+    /* thumbnails menores no XS */
   }
 }
 
+/* Selo de seleção dentro do viewer */
+.viewer-check {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  background: rgba(25, 135, 84, 0.95);
+  /* tom "success" */
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+  pointer-events: none;
+  /* não intercepta clique na imagem */
+}

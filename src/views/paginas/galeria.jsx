@@ -225,11 +225,11 @@ export default function Galeria() {
     return cart.items.includes(composedId);
   }, [viewerData, cart.items]);
 
-  const toggleSelectCurrentAndClose = useCallback(() => {
+  // Seleciona/deseleciona a foto atual sem fechar o modal
+  const toggleSelectCurrent = useCallback(() => {
     if (!viewerData.coreoId || !viewerData.file) return;
     const composedId = `${viewerData.coreoId}::${viewerData.file}`;
     cart.toggle(composedId);
-    setViewerOpen(false);
   }, [viewerData, cart]);
 
   const navigate = useCallback(
@@ -240,7 +240,7 @@ export default function Galeria() {
 
       let nextIndex = viewerData.index + delta;
       if (nextIndex < 0) nextIndex = total - 1; // circular
-      if (nextIndex >= total) nextIndex = 0;    // circular
+      if (nextIndex >= total) nextIndex = 0; // circular
 
       const nextSrc = currentCoreo.images[nextIndex];
       setViewerData({
@@ -268,12 +268,12 @@ export default function Galeria() {
         navigate(1);
       } else if (e.key === " " || e.key === "Enter") {
         e.preventDefault();
-        toggleSelectCurrentAndClose();
+        toggleSelectCurrent();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [viewerOpen, navigate, toggleSelectCurrentAndClose]);
+  }, [viewerOpen, navigate, toggleSelectCurrent]);
 
   return (
     <>
@@ -603,10 +603,7 @@ export default function Galeria() {
 
           <button
             className={`btn ${cart.count === 0 ? "btn-secondary" : "btn-success"}`}
-            onClick={() => {
-              // if (!form.nome || !form.email || !form.tel) { alert("Preencha nome, e-mail e telefone."); return; }
-              finalizarNoWhats();
-            }}
+            onClick={finalizarNoWhats}
             disabled={cart.count === 0}
           >
             Finalizar
@@ -630,25 +627,24 @@ export default function Galeria() {
 
         <ModalBody className="p-0">
           {viewerData.imgSrc ? (
-            <div className="viewer-img-wrap d-flex flex-column align-items-center">
+            <div className="viewer-img-wrap d-flex flex-column align-items-center position-relative">
+              {/* selo de selecionada */}
+              {isCurrentSelected() && (
+                <span className="viewer-check">✓ Selecionada</span>
+              )}
+
               <img
                 src={viewerData.imgSrc}
                 alt={viewerData.file || "foto"}
                 className="viewer-img mb-2"
               />
 
-              {/* botões de navegação logo colados na foto */}
+              {/* navegação colada na foto */}
               <div className="d-flex justify-content-between w-100 px-3">
-                <button
-                  className="btn btn-outline-secondary"
-                  onClick={() => navigate(-1)}
-                >
+                <button className="btn btn-outline-secondary" onClick={() => navigate(-1)}>
                   ← Anterior
                 </button>
-                <button
-                  className="btn btn-outline-secondary"
-                  onClick={() => navigate(1)}
-                >
+                <button className="btn btn-outline-secondary" onClick={() => navigate(1)}>
                   Próxima →
                 </button>
               </div>
@@ -658,7 +654,6 @@ export default function Galeria() {
           )}
         </ModalBody>
 
-
         <ModalFooter className="w-100 d-flex justify-content-between">
           <button className="btn btn-outline-secondary" onClick={closeViewer}>
             Voltar
@@ -666,14 +661,12 @@ export default function Galeria() {
 
           <button
             className={`btn ${isCurrentSelected() ? "btn-secondary" : "btn-success"}`}
-            onClick={toggleSelectCurrentAndClose}
+            onClick={toggleSelectCurrent} // não fecha o modal
           >
             {isCurrentSelected() ? "Remover da seleção" : "Selecionar esta foto"}
           </button>
         </ModalFooter>
-
       </Modal>
-
     </>
   );
 }
