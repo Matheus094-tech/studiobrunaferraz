@@ -18,11 +18,16 @@ import "assets/css/galeria.css";
 /* =========================================================
    HELPERS
    ========================================================= */
-function importAll(r, excludeRe) {
-  return r
-    .keys()
-    .filter((k) => (excludeRe ? !excludeRe.test(k) : true))
-    .map(r);
+function importAll(ctx, excludeRe) {
+  try {
+    return ctx
+      .keys()
+      .filter((k) => (excludeRe ? !excludeRe.test(k) : true))
+      .map(ctx);
+  } catch (e) {
+    console.error("[Galeria] Falha ao importar imagens:", e);
+    return [];
+  }
 }
 const EXCLUDE_COVER = /\/?capa\.(jpg|jpeg|png|webp)$/i;
 
@@ -31,7 +36,7 @@ const moneyBRL = (cents) =>
 
 function fileNameFromSrc(imgSrc) {
   try {
-    const parts = imgSrc.split("/");
+    const parts = String(imgSrc).split("/");
     return decodeURIComponent(parts[parts.length - 1]);
   } catch {
     return String(imgSrc);
@@ -39,32 +44,28 @@ function fileNameFromSrc(imgSrc) {
 }
 
 /* =========================================================
-   IMPORTS DE IMAGENS (com marca d’água)
+   IMPORTS DE IMAGENS (com marca d’água) — Webpack literals
    ========================================================= */
-const coreografia1Imgs = importAll(
-  require.context(
-    "assets/img_wm/espetaculos/novembro/coreografia_1",
-    false,
-    /\.(png|jpe?g|webp|gif)$/i
-  ),
-  EXCLUDE_COVER
+// IMPORTANTE: os caminhos abaixo precisam existir no build.
+const coreografia1Ctx = require.context(
+  "assets/img_wm/espetaculos/novembro/coreografia_1",
+  false,
+  /\.(png|jpe?g|webp|gif)$/i
 );
-const coreografia2Imgs = importAll(
-  require.context(
-    "assets/img_wm/espetaculos/novembro/coreografia_2",
-    false,
-    /\.(png|jpe?g|webp|gif)$/i
-  ),
-  EXCLUDE_COVER
+const coreografia2Ctx = require.context(
+  "assets/img_wm/espetaculos/novembro/coreografia_2",
+  false,
+  /\.(png|jpe?g|webp|gif)$/i
 );
-const coreografia3Imgs = importAll(
-  require.context(
-    "assets/img_wm/espetaculos/novembro/coreografia_3",
-    false,
-    /\.(png|jpe?g|webp|gif)$/i
-  ),
-  EXCLUDE_COVER
+const coreografia3Ctx = require.context(
+  "assets/img_wm/espetaculos/novembro/coreografia_3",
+  false,
+  /\.(png|jpe?g|webp|gif)$/i
 );
+
+const coreografia1Imgs = importAll(coreografia1Ctx, EXCLUDE_COVER);
+const coreografia2Imgs = importAll(coreografia2Ctx, EXCLUDE_COVER);
+const coreografia3Imgs = importAll(coreografia3Ctx, EXCLUDE_COVER);
 
 /* ===================== CONFIG ===================== */
 const WHATSAPP_NUMBER = "5511991502640"; // DDI+DDD+número
@@ -135,11 +136,13 @@ export default function Galeria() {
   }, []);
 
   const hasEvents = Array.isArray(EVENTS) && EVENTS.length > 0;
+
   const [view, setView] = useState("events"); // "events" | "event" | "coreo"
-  const [eventId, setEventId] = useState(hasEvents ? EVENTS[0].id : null);
-  const [coreoId, setCoreoId] = useState(
-    hasEvents && EVENTS[0].coreos?.length ? EVENTS[0].coreos[0].id : null
-  );
+  const [eventId, setEventId] = useState(() => (hasEvents ? EVENTS[0].id : null));
+  const [coreoId, setCoreoId] = useState(() => {
+    const first = hasEvents && EVENTS[0].coreos?.length ? EVENTS[0].coreos[0].id : null;
+    return first ?? null;
+  });
 
   const currentEvent = useMemo(
     () => (hasEvents ? EVENTS.find((e) => e.id === eventId) : null),
@@ -174,7 +177,8 @@ export default function Galeria() {
     for (const c of currentEvent?.coreos ?? []) {
       const arr = groupedByCoreo[c.id] || [];
       if (arr.length) {
-        linhas.push(`• ${c.title}: ${arr.join(", ")}`);
+        linhas.push(`• ${c.title}:`);
+        linhas.push(arr.join("\n")); 
       }
     }
     linhas.push(`Qtd total: ${cart.count}`);
@@ -629,9 +633,7 @@ export default function Galeria() {
           {viewerData.imgSrc ? (
             <div className="viewer-img-wrap d-flex flex-column align-items-center position-relative">
               {/* selo de selecionada */}
-              {isCurrentSelected() && (
-                <span className="viewer-check">✓ Selecionada</span>
-              )}
+              {isCurrentSelected() && <span className="viewer-check">✓ Selecionada</span>}
 
               <img
                 src={viewerData.imgSrc}
