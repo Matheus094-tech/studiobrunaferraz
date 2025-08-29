@@ -75,7 +75,7 @@ const PRICE_PER_PHOTO = 2000; // em centavos (R$ 20,00)
 const EVENTS = [
   {
     id: "esp-novembro",
-    title: "Espetáculo 01",
+    title: "Alice no páis das maravilhas",
     cover: coverNovembro,
     coreos: [
       {
