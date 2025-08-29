@@ -618,8 +618,8 @@ export default function Galeria() {
       <Modal
         isOpen={viewerOpen}
         toggle={closeViewer}
-        className="modal-viewer modal-top"   // adiciona modal-top aqui
-        modalClassName="modal-top"           // e aqui, para garantir na .modal-dialog
+        className="modal-viewer modal-top"
+        modalClassName="modal-top"
       >
         <ModalHeader toggle={closeViewer}>
           <div className="d-flex flex-column">
@@ -630,18 +630,34 @@ export default function Galeria() {
 
         <ModalBody className="p-0">
           {viewerData.imgSrc ? (
-            <div className="viewer-img-wrap">
-              {/* seta esquerda */}
+            <div className="viewer-img-wrap d-flex flex-column align-items-center">
               <img
                 src={viewerData.imgSrc}
                 alt={viewerData.file || "foto"}
-                className="viewer-img"
+                className="viewer-img mb-2"
               />
+
+              {/* botões de navegação logo colados na foto */}
+              <div className="d-flex justify-content-between w-100 px-3">
+                <button
+                  className="btn btn-outline-secondary"
+                  onClick={() => navigate(-1)}
+                >
+                  ← Anterior
+                </button>
+                <button
+                  className="btn btn-outline-secondary"
+                  onClick={() => navigate(1)}
+                >
+                  Próxima →
+                </button>
+              </div>
             </div>
           ) : (
             <div className="p-4 text-center text-muted">Carregando…</div>
           )}
         </ModalBody>
+
 
         <ModalFooter className="w-100 d-flex justify-content-between">
           <button className="btn btn-outline-secondary" onClick={closeViewer}>
@@ -657,6 +673,7 @@ export default function Galeria() {
         </ModalFooter>
 
       </Modal>
+
     </>
   );
 }
