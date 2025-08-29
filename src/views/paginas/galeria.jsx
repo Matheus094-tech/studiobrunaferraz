@@ -68,7 +68,7 @@ const coreografia2Imgs = importAll(coreografia2Ctx, EXCLUDE_COVER);
 const coreografia3Imgs = importAll(coreografia3Ctx, EXCLUDE_COVER);
 
 /* ===================== CONFIG ===================== */
-const WHATSAPP_NUMBER = "5511991502640"; // DDI+DDD+número
+const WHATSAPP_NUMBER = "5511964230207"; // DDI+DDD+número
 const PRICE_PER_PHOTO = 2000; // em centavos (R$ 20,00)
 
 /* ===================== DADOS (EVENTS) ===================== */
