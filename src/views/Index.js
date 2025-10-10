@@ -1,10 +1,13 @@
 // src/views/Index.js
 import React from "react";
 
+// CSS globais — sempre aqui!
+import "bootstrap/dist/css/bootstrap.min.css";
+import "assets/css/blk-design-system-react.css";
+
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import PageHeader from "components/PageHeader/PageHeader.js";
-import Footer from "components/Footer/Footer.js";
 
 // sections for this page/view
 // (ajuste os caminhos/exactos nomes conforme seus arquivos reais)
@@ -30,7 +33,6 @@ export default function Index() {
           <Equipe />
           <Contato />
         </div>
-        <Footer />
       </div>
     </>
   );

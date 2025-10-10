@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "../../pages/Home.css";
 
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
@@ -13,15 +14,15 @@ export default function Habilidades() {
   return (
     <div className="section fundo-um" id="equipe">
       <Container>
-        <Row style={{ color: "#fffda8" }} className="cv">
-          <h2 style={{ color: "#fffda8" }} data-aos="fade-up" className="title text-center">
+        <Row style={{ color: "#0c102d" }} className="cv">
+          <h2 style={{ color: "#0c102d" }} data-aos="fade-up" className="title text-center">
             Modalidades
           </h2>
           <p data-aos="fade-up" style={{ fontSize: 22 }}>Conheça nossas modalidades:</p>
           <Col md="12 mt-3 text-center">
             <Row>
-              <div class="cv-item col-md-4 mt-3" style={{ color: "#fffda8" }} data-aos="fade-up">
-                <h4 className="" style={{ color: "#fffda8" }}>Ballet de formação - Todas as idades</h4>
+              <div class="cv-item col-md-4 mt-3" style={{ color: "#0c102d" }} data-aos="fade-up">
+                <h4 className="" style={{ color: "#0c102d" }}>Ballet de formação - Todas as idades</h4>
                 {/* 
               <img
                 alt="Ballet clássico"
@@ -36,8 +37,8 @@ export default function Habilidades() {
                   Ideal para crianças e adolescentes que desejam explorar a elegância e a disciplina do ballet.
                 </p>
               </div>
-              <div class="cv-item col-md-4 mt-3" style={{ color: "#fffda8" }} data-aos="fade-up">
-                <h4 className="" style={{ color: "#fffda8" }}>Jazz Dance - A partir dos 6 anos</h4>
+              <div class="cv-item col-md-4 mt-3" style={{ color: "#0c102d" }} data-aos="fade-up">
+                <h4 className="" style={{ color: "#0c102d" }}>Jazz Dance - A partir dos 6 anos</h4>
                 {/*   <img
                 alt="Jazz Dance"
                 height={400}
@@ -50,8 +51,8 @@ export default function Habilidades() {
                   e adultos que buscam liberdade de movimento e autoexpressão.
                 </p>
               </div>
-              <div class="cv-item col-md-4 mt-3" style={{ color: "#fffda8" }} data-aos="fade-up">
-                <h4 className="" style={{ color: "#fffda8" }}>Ballet adulto - A partir 15 anos</h4>
+              <div class="cv-item col-md-4 mt-3" style={{ color: "#0c102d" }} data-aos="fade-up">
+                <h4 className="" style={{ color: "#0c102d" }}>Ballet adulto - A partir 15 anos</h4>
                 {/* <img
                 alt="Jazz Dance"
                 height={400}
@@ -66,8 +67,8 @@ export default function Habilidades() {
               </div>
             </Row>
             <Row className="mt-5 mb-5">
-              <div class="cv-item col-md-4 mt-3" style={{ color: "#fffda8" }} data-aos="fade-up">
-                <h4 className="" style={{ color: "#fffda8" }}>Baby Class - A partir dos 3 anos</h4>
+              <div class="cv-item col-md-4 mt-3" style={{ color: "#0c102d" }} data-aos="fade-up">
+                <h4 className="" style={{ color: "#0c102d" }}>Baby Class - A partir dos 3 anos</h4>
                 {/*    <img
                 alt="Baby Class"
                 height={400}
@@ -81,10 +82,10 @@ export default function Habilidades() {
                 </p>
               </div>
          {/*
-              <div class="cv-item col-md-4 mt-3" style={{ color: "#fffda8" }} data-aos="fade-up">
-                <h4 className="" style={{ color: "#fffda8" }}>Psicomotricidade (Baby-Fraldinha) - A partir dos 1 ano e 8 meses</h4>
+              <div class="cv-item col-md-4 mt-3" style={{ color: "#0c102d" }} data-aos="fade-up">
+                <h4 className="" style={{ color: "#0c102d" }}>Psicomotricidade (Baby-Fraldinha) - A partir dos 1 ano e 8 meses</h4>
                 {/*  <img
-              <h4 className="" style={{ color: "#fffda8" }}>Psicomotricidade (Baby-Fraldinha)</h4>
+              <h4 className="" style={{ color: "#0c102d" }}>Psicomotricidade (Baby-Fraldinha)</h4>
               <img
                 alt="Baby Fraldinha"
                 height={400}
@@ -96,11 +97,11 @@ export default function Habilidades() {
                   A Psicomotricidade é integrada às nossas aulas para promover o desenvolvimento físico, cognitivo e emocional. Adequada para desenvolver e preparar crianças apartir de 1 ano e 8 meses.
                 </p>
               </div> */}
-               <div class="cv-item col-md-4 mt-3" style={{ color: "#fffda8" }} data-aos="fade-up"></div>
-              <div class="cv-item col-md-4 mt-3" style={{ color: "#fffda8" }} data-aos="fade-up">
-                <h4 className="" style={{ color: "#fffda8" }}>Ballet infantil - A partir dos 6 anos</h4>
+               <div class="cv-item col-md-4 mt-3" style={{ color: "#0c102d" }} data-aos="fade-up"></div>
+              <div class="cv-item col-md-4 mt-3" style={{ color: "#0c102d" }} data-aos="fade-up">
+                <h4 className="" style={{ color: "#0c102d" }}>Ballet infantil - A partir dos 6 anos</h4>
                 {/*   <img
-              <h4 className="" style={{ color: "#fffda8" }}>Ballet infantil</h4>
+              <h4 className="" style={{ color: "#0c102d" }}>Ballet infantil</h4>
               <img
                 alt="Jazz Dance"
                 height={400}
@@ -126,7 +127,7 @@ export default function Habilidades() {
               preserveAspectRatio="xMidYMid meet">
 
               <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                fill="#fffda8" stroke="none">
+                fill="#0c102d" stroke="none">
                 <path d="M3243 5105 c-120 -33 -237 -120 -294 -221 l-29 -50 -87 19 c-123 27
 -401 29 -526 4 -496 -100 -857 -436 -932 -866 -18 -100 -21 -776 -5 -881 40
 -254 197 -485 440 -650 62 -42 237 -130 259 -130 8 0 11 -38 11 -124 l0 -124
@@ -170,7 +171,7 @@ m-345 5 c-15 -61 -54 -204 -84 -320 -86 -320 -87 -330 -87 -771 l0 -384 -201
 38 -119 4z"/>
               </g>
             </svg>
-            <div style={{ color: "#fffda8" }} className="text-center" data-aos="fade-up-right">
+            <div style={{ color: "#0c102d" }} className="text-center" data-aos="fade-up-right">
               <span className="nomeEquipe mt-5">Equipe de professores:</span>
               <p className="mt-2 textoSobre">
                 Contamos com uma equipe de professores dedicados,
@@ -185,7 +186,7 @@ m-345 5 c-15 -61 -54 -204 -84 -320 -86 -320 -87 -330 -87 -771 l0 -384 -201
               viewBox="0 0 512.000000 512.000000"
               preserveAspectRatio="xMidYMid meet">
               <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                fill="#fffda8" stroke="none">
+                fill="#0c102d" stroke="none">
                 <path d="M505 4935 c-52 -51 -53 -50 314 -493 l339 -409 -193 -824 c-107 -453
 -197 -834 -200 -846 -5 -21 -5 -21 -57 8 -64 35 -89 36 -124 6 l-27 -24 -17
 -274 -16 -274 -56 -95 c-69 -117 -73 -131 -54 -168 17 -33 34 -42 75 -42 33 0
@@ -282,7 +283,7 @@ c367 443 366 442 314 493 -31 32 -78 33 -108 3 -12 -13 -150 -178 -307 -367
 -80 80 -19 0 -40 -9 -55 -25z"/>
               </g>
             </svg>
-            <div style={{ color: "#fffda8" }} className="text-center" data-aos="fade-up-right">
+            <div style={{ color: "#0c102d" }} className="text-center" data-aos="fade-up-right">
               <span className="nomeEquipe mt-5">Eventos e Espetáculos:</span>
               <p className="mt-2 textoSobre">
                 Ao longo do ano, preparamos apresentações encantadoras, oportunidades para nossos alunos brilharem no palco e compartilharem sua paixão com amigos e familiares.

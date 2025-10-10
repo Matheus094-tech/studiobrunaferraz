@@ -9,7 +9,7 @@ export default function Sobre() {
   return (
     <div className="section" id="sobre-mim">
       <Container>
-        <h2 style={{ color: "#fffda8" }} data-aos="fade-up" className="text-center title">
+        <h2 style={{ color: "#0c102d" }} data-aos="fade-up" className="text-center title">
           Sobre nós
         </h2>
         <Row>
@@ -34,7 +34,7 @@ export default function Sobre() {
           <Col md="6">
             <div
               data-aos="fade-up"
-              style={{ textAlign: "center", color: "#fffda8" }}>
+              style={{ textAlign: "center", color: "#0c102d" }}>
               <div dangerouslySetInnerHTML={{
                 __html: `
         <video
@@ -57,7 +57,7 @@ export default function Sobre() {
                 preserveAspectRatio="xMidYMid meet">
                 <g
                   transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                  fill="#fffda8"
+                  fill="#0c102d"
                   stroke="none">
                   <path
                     d="M1686 5099 c-40 -31 -34 -70 35 -231 83 -193 202 -554 236 -713 22
@@ -93,7 +93,7 @@ l7 -59 -43 39 c-182 163 -957 898 -952 903 7 8 782 130 809 128 16 -2 23 -18
               </svg>  */}
             </div>
             <div className="mt-5 textoSobre">
-              <p data-aos="fade-up" style={{ color: "#fffda8" }}>
+              <p data-aos="fade-up" style={{ color: "#0c102d" }}>
                 Somos o Studio de Dança Bruna Ferraz, um espaço dedicado à arte da dança, onde cada passo conta uma história e cada movimento expressa emoções.
                 Fundada em 2024, nossa escola é mais do que um local de aprendizado; é um lar para aqueles que encontram alegria na dança.
 
@@ -103,7 +103,7 @@ l7 -59 -43 39 c-182 163 -957 898 -952 903 7 8 782 130 809 128 16 -2 23 -18
           <Col md="6">
             <div
               data-aos="fade-up"
-              style={{ textAlign: "center", color: "#fffda8" }}>
+              style={{ textAlign: "center", color: "#0c102d" }}>
               <div dangerouslySetInnerHTML={{
                 __html: `
         <video
@@ -126,7 +126,7 @@ l7 -59 -43 39 c-182 163 -957 898 -952 903 7 8 782 130 809 128 16 -2 23 -18
                 preserveAspectRatio="xMidYMid meet">
                 <g
                   transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                  fill="#fffda8"
+                  fill="#0c102d"
                   stroke="none">
                   <path
                     d="M2343 5051 c-54 -39 -193 -192 -281 -309 -121 -162 -212 -366 -212
@@ -177,7 +177,7 @@ m82 -1390 l38 -116 -22 -57 c-11 -31 -32 -73 -45 -95 l-23 -38 -6 58 c-16 152
               </svg> */}
             </div>
             <div className="mt-5 textoSobre">
-              <p data-aos="fade-up" style={{ color: "#fffda8" }}>
+              <p data-aos="fade-up" style={{ color: "#0c102d" }}>
                 Nossa Missão: Inspirar, educar e celebrar a arte da dança, cultivando um ambiente acolhedor e inspirador para todos os apaixonados por esse universo encantador.
               </p>
             </div>
@@ -185,7 +185,7 @@ m82 -1390 l38 -116 -22 -57 c-11 -31 -32 -73 -45 -95 l-23 -38 -6 58 c-16 152
           <Col md="6">
             <div
               data-aos="fade-up"
-              style={{ textAlign: "center", color: "#fffda8" }}>
+              style={{ textAlign: "center", color: "#0c102d" }}>
               <div dangerouslySetInnerHTML={{
                 __html: `
         <video
@@ -207,7 +207,7 @@ m82 -1390 l38 -116 -22 -57 c-11 -31 -32 -73 -45 -95 l-23 -38 -6 58 c-16 152
                 preserveAspectRatio="xMidYMid meet">
                 <g
                   transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                  fill="#fffda8"
+                  fill="#0c102d"
                   stroke="none">
                   <path
                     d="M1078 4475 c-57 -32 -83 -129 -82 -305 1 -135 17 -221 57 -300 13
@@ -268,7 +268,7 @@ c40 -43 118 -93 181 -115 l51 -18 -18 -48 c-45 -118 -150 -233 -241 -263 -88
               </svg> */}
             </div>
             <div className="mt-5 textoSobre">
-              <p data-aos="fade-up" style={{ color: "#fffda8" }}>
+              <p data-aos="fade-up" style={{ color: "#0c102d" }}>
                 Variedade de Estilos: Oferecemos aulas de ballet, jazz e psicomotricidade para crianças, adolescentes e adultos. Seja você um iniciante ou dançarino experiente, há um lugar para você em nossa família.
               </p>
             </div>
@@ -276,7 +276,7 @@ c40 -43 118 -93 181 -115 l51 -18 -18 -48 c-45 -118 -150 -233 -241 -263 -88
           <Col md="6">
             <div
               data-aos="fade-up"
-              style={{ textAlign: "center", color: "#fffda8" }}>
+              style={{ textAlign: "center", color: "#0c102d" }}>
               <div dangerouslySetInnerHTML={{
                 __html: `
         <video
@@ -298,7 +298,7 @@ c40 -43 118 -93 181 -115 l51 -18 -18 -48 c-45 -118 -150 -233 -241 -263 -88
                 preserveAspectRatio="xMidYMid meet">
                 <g
                   transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                  fill="#fffda8"
+                  fill="#0c102d"
                   stroke="none">
                   <path
                     d="M2054 5105 c-86 -19 -155 -56 -222 -123 -224 -218 -176 -577 98 -739
@@ -340,7 +340,7 @@ m-2197 -65 c81 -308 405 -490 709 -399 183 56 346 228 389 411 13 59 13 58 20
             </svg> */}
             </div>
             <div className="mt-5 textoSobre">
-              <p data-aos="fade-up" style={{ color: "#fffda8" }}>
+              <p data-aos="fade-up" style={{ color: "#0c102d" }}>
                 Ambiente Acolhedor: Nossa escola é mais do que um local de treino; é um lar onde amizades florescem, sonhos ganham vida e cada conquista é celebrada. Aqui, cultivamos uma comunidade que compartilha o amor pela dança.
               </p>
             </div>

@@ -31,14 +31,14 @@ const Promocao = () => {
 
   return (
     <Container className="container-fixo">
-      <h2 style={{ color: "#fffda8", marginTop: 55, fontSize: '1.5rem' }} className="text-center title texto-piscando">
+      <h2 style={{ color: "#0c102d", marginTop: 55, fontSize: '1.5rem' }} className="text-center title texto-piscando">
         PROMOÇÃO IMPERDÍVEL EM
       </h2>
       <Row>
         <Col md="12" style={{ marginBottom: 150, textAlign: "center" }}>
-          <div className="text-center texto-piscando" style={{ fontWeight: 'bold', fontSize: '1.5rem', color: '#fffda8' }}>
+          <div className="text-center texto-piscando" style={{ fontWeight: 'bold', fontSize: '1.5rem', color: '#0c102d' }}>
             {timeLeft > 0 ? formatTime(timeLeft) : 'Promoção Encerrada!'}
-            <span style={{ cursor: 'pointer', color: '#fffda8', textDecoration: 'underline' }} onClick={toggleModal}><br />Saiba mais</span>
+            <span style={{ cursor: 'pointer', color: '#0c102d', textDecoration: 'underline' }} onClick={toggleModal}><br />Saiba mais</span>
           </div>
         </Col>
       </Row>
