@@ -1,0 +1,83 @@
+p {
+  color: #0c102d;
+}
+
+body {
+  background-color: #ECE9E9;
+}
+
+.fundo-um {
+  background-color: #ECE9E9 !important;
+}
+
+.fundo-dois {
+  background-color: #ECE9E9 !important;
+}
+
+/* Container principal da Home */
+.page-header {
+  background-color: #ECE9E9; /* mantém o fundo do tema */
+  padding-top: 15vh; /* distância da navbar fixa */
+  padding-bottom: 5vh;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* Imagem central */
+.header.fundo-um {
+  text-align: center;
+}
+
+.header.fundo-um img {
+  width: 100%;
+  max-width: 800px; /* 👈 tamanho máximo reduzido */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+  border-radius: 8px; /* opcional, deixa mais refinado */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Efeito suave no hover */
+.header.fundo-um img:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+}
+
+/* Texto logo abaixo da imagem */
+.home-text {
+  margin-top: 30px; /* espaço entre imagem e texto */
+  text-align: center;
+  color: #0c102d;
+  font-size: 18px;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Cada parágrafo */
+.home-text p {
+  margin-bottom: 18px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .page-header {
+    padding-top: 12vh;
+  }
+
+  .header.fundo-um img {
+    max-width: 400px; /* 👈 menor ainda no mobile */
+  }
+
+  .home-text {
+    margin-top: 20px;
+    font-size: 16px;
+    padding: 0 15px;
+  }
+}

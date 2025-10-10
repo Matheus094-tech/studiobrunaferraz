@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./carrosel.css";
+import "../../pages/Home.css";
 
 // reactstrap components
 import { Container, UncontrolledCarousel, Row, Col } from "reactstrap";
@@ -156,7 +157,7 @@ export default function Curriculo() {
     <div className="section fundo-dois" id="curriculo">
       
       <Container>
-        <h2 style={{ color: "#fffda8" }} data-aos="fade-up" className="text-center title">
+        <h2 style={{ color: "#0c102d" }} data-aos="fade-up" className="text-center title">
           Galeria
         </h2>
         <Row>

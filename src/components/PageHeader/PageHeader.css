@@ -2,7 +2,7 @@
   font-weight: 400;
   font-style: normal;
   font-family: "Parisienne";
-  color: #fffda8;
+  color: #0c102d;
   font-size: 65px;
   line-height: 1;
   text-align: center;
@@ -10,7 +10,7 @@
 
 .navBarTexto {
   font-weight: 500 !important;
-  color: #fffda8;
+  color: #0c102d;
 }
 
 .textoSobre {
@@ -18,19 +18,19 @@
   margin-bottom: 50px;
   text-align: center;
   font-size: 18px;
-  color: #fffda8 !important;
+  color: #0c102d !important;
 }
 
 
 p {
-  color: #fffda8;
+  color: #0c102d;
 }
 
 .profissao {
   font-weight: 400;
   font-style: normal;
   font-weight: bold;
-  color: #fffda8;
+  color: #0c102d;
   font-size: 26px;
   line-height: 1;
   letter-spacing: 1px;
@@ -42,7 +42,7 @@ p {
   letter-spacing: 0px;
   font-weight: 400;
   font-style: normal;
-  color: #fffda8;
+  color: #0c102d;
   font-size: 40px;
   line-height: 1;
   letter-spacing: 1px;
@@ -64,15 +64,15 @@ p {
 }
 
 body {
-  background-color: #0c102d;
+  background-color: #ECE9E9;
 }
 
 .fundo-um {
-  background-color: #0c102d !important;
+  background-color: #ECE9E9 !important;
 }
 
 .fundo-dois {
-  background-color: #0c102d !important;
+  background-color: #ECE9E9 !important;
 }
 
 .nomeEquipe {
@@ -80,7 +80,7 @@ body {
   font-weight: bold;
   font-size: 22px;
   font-family: "Gilroy-Bold";
-  color: #fffda8;
+  color: #0c102d;
 }
 
 .carousel-item img {
@@ -90,13 +90,13 @@ body {
 .footer-bruna {
   padding: 50px 0;
   border-top: 2px solid white;
-  background: #0c102d !important;
+  background: #ECE9E9 !important;
   text-align: center;
 }
 
 .iconeFooter {
   font-size: 50px;
-  color: #fffda8;
+  color: #0c102d;
 }
 
 .iconeFooter:hover {
@@ -106,13 +106,13 @@ body {
 .cv .cv-title {
   margin-top: 20px;
   margin-bottom: 20px;
-  color: #fffda8;
+  color: #0c102d;
 }
 
 .cv .cv-item h4 {
   line-height: 18px;
   font-weight: 550;
-  color: #fffda8;
+  color: #0c102d;
   margin-bottom: 10px;
 }
 
@@ -120,7 +120,7 @@ body {
 .cv .cv-item h5 {
   display: inline-block;
   margin-bottom: 10px;
-  color: #fffda8;
+  color: #0c102d;
 }
 
 
