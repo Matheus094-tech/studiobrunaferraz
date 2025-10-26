@@ -5,6 +5,15 @@ License - nucleoapp.com/license/
 Created using IcoMoon - icomoon.io
 
 -------------------------------- */
+html, body, #root { min-height: 100%; }
+
+body.page-bg {
+  background: #ECE9E9;
+}
+
+.wrapper { min-height: 100svh; display: flex; flex-direction: column; }
+.main { flex: 1; }
+.section { background: transparent; }
 
 @font-face {
   font-family: 'Nucleo';

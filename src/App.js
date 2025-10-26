@@ -1,5 +1,5 @@
 // src/App.js
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import Layout from "components/layout/Layout";
 import ScrollToTop from "components/ScrollToTop";
 import BotaoWhatsapp from "components/BotaoWhatsapp";
@@ -18,6 +18,12 @@ const NotFound = () => (
 );
 
 export default function App() {
+  // ✅ aplique a classe de fundo de forma determinística
+  useEffect(() => {
+    document.body.classList.add("page-bg");
+    return () => document.body.classList.remove("page-bg");
+  }, []);
+
   return (
     <Layout>
       <ScrollToTop />
@@ -26,7 +32,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="/sobre" element={<SobreNos />} />
           <Route path="/modalidades" element={<Modalidades />} />
-          <Route path="/eventos" element={<Eventos />} /> {/* ✅ adicionada */}
+          <Route path="/eventos" element={<Eventos />} />
           <Route path="/contato" element={<Contato />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="*" element={<NotFound />} />

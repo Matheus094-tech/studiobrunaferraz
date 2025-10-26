@@ -4,9 +4,9 @@ import IndexNavbar from "components/Navbars/IndexNavbar";
 
 export default function Layout({ children }) {
   return (
-    <div className="app-shell d-flex flex-column min-vh-100">
+    <div className="wrapper d-flex flex-column min-vh-100" style={{ background: "#ECE9E9" }}>
       <IndexNavbar />
-      <main className="flex-grow-1" style={{ paddingTop: "70px" }}>
+      <main className="main flex-grow-1" style={{ paddingTop: "80px" }}>
         {children}
       </main>
     </div>

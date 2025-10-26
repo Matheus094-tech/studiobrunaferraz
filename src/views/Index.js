@@ -4,6 +4,7 @@ import React from "react";
 // CSS globais — sempre aqui!
 import "bootstrap/dist/css/bootstrap.min.css";
 import "assets/css/blk-design-system-react.css";
+import "assets/css/global.css";
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
