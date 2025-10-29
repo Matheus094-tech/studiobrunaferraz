@@ -18,7 +18,7 @@ export default function Home() {
         <div className="home-text">
           <h1
             style={{
-              color: "#f5ae28",
+              color: "#D3AF37",
               fontFamily: "Parisienne, cursive",
               fontWeight: 400,
               fontSize: "48px",
@@ -46,7 +46,7 @@ export default function Home() {
         <div
           className="text-center mt-5"
           style={{
-            color: "#f5ae28",
+            color: "#D3AF37",
             fontFamily: "Parisienne, cursive",
             fontSize: "40px",
             fontWeight: 400,
@@ -61,7 +61,7 @@ export default function Home() {
           style={{
             width: "80px",
             height: "3px",
-            backgroundColor: "#f5ae28",
+            backgroundColor: "#D3AF37",
             margin: "0 auto 40px auto",
             borderRadius: "2px",
           }}
@@ -116,7 +116,7 @@ export default function Home() {
                   className={`las la-${item.icon}`}
                   style={{
                     fontSize: "45px",
-                    color: "#f5ae28",
+                    color: "#D3AF37",
                     marginBottom: "10px",
                   }}
                 ></i>

@@ -109,7 +109,7 @@ function ActionBar({ count, totalCents, onClear, onFinalize, finalizeDisabled })
 
       <div className="ms-auto d-grid" style={{ minWidth: 260 }}>
         <span className="text-end" style={{ marginBottom: 6 }}>
-          <strong style={{ color: "#f5ae28" }}>
+          <strong style={{ color: "#D3AF37" }}>
             Total: {moneyBRL(totalCents)}
           </strong>
         </span>
@@ -185,7 +185,7 @@ export default function Galeria() {
   };
 
   const TotalStrong = ({ value }) => (
-    <span style={{ color: "#f5ae28", fontWeight: 800, fontSize: 18 }}>{value}</span>
+    <span style={{ color: "#D3AF37", fontWeight: 800, fontSize: 18 }}>{value}</span>
   );
 
   /* ============ Viewer (Modal – visual das Modalidades) ============ */
@@ -239,7 +239,7 @@ export default function Galeria() {
 
   /* =================== Styles inline mínimos =================== */
   const sectionStyle = { backgroundColor: "#ECE9E9", paddingTop: 60, paddingBottom: 60 };
-  const titleStyle   = { color: "#f5ae28", fontFamily: "Parisienne, cursive", fontWeight: 400, fontSize: "36px", lineHeight: 1.2, marginBottom: "16px" };
+  const titleStyle   = { color: "#000080", fontFamily: "Parisienne, cursive", fontWeight: 400, fontSize: "36px", lineHeight: 1.2, marginBottom: "16px" };
 
   const cardWrap = {
     position: "relative",
@@ -576,7 +576,7 @@ export default function Galeria() {
                   left: 10,
                   transform: "translateY(-50%)",
                   background: "#ECE9E9",
-                  color: "#f5ae28",
+                  color: "#D3AF37",
                   border: "none",
                   borderRadius: "50%",
                   width: 44,
@@ -600,7 +600,7 @@ export default function Galeria() {
                   right: 10,
                   transform: "translateY(-50%)",
                   background: "#ECE9E9",
-                  color: "#f5ae28",
+                  color: "#D3AF37",
                   border: "none",
                   borderRadius: "50%",
                   width: 44,

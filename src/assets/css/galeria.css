@@ -1,3 +1,13 @@
+/* Importa a fonte Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* Força Montserrat globalmente — prioridade máxima */
+html, body, #root, body * {
+  font-family: 'Montserrat', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* base da seção */
 #comprar-fotos { background: #ECE9E9; }
 
@@ -36,10 +46,10 @@
 .thumb-name { color: #fff; font-weight: 600; font-size: 12px; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
 .thumb-check {
   width: 26px; height: 26px; border-radius: 50%;
-  background: #f5ae28; color: #0c102d; display: grid; place-items: center; font-weight: 800;
+  background: #D3AF37; color: #0c102d; display: grid; place-items: center; font-weight: 800;
   box-shadow: 0 2px 8px rgba(0,0,0,.2);
 }
-.thumb-card.is-selected { border-color: #f5ae28; box-shadow: 0 0 0 2px #f5ae28 inset, 0 8px 22px rgba(0,0,0,.10); }
+.thumb-card.is-selected { border-color: #D3AF37; box-shadow: 0 0 0 2px #D3AF37 inset, 0 8px 22px rgba(0,0,0,.10); }
 
 /* modal viewer – estilo Modalidades */
 .modal-viewer .modal-content {
@@ -64,7 +74,7 @@
 .viewer-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 44px; height: 44px; border-radius: 50%;
-  border: none; background: #ECE9E9; color: #f5ae28;
+  border: none; background: #ECE9E9; color: #D3AF37;
   display: grid; place-items: center; cursor: pointer;
   transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
   box-shadow: 0 6px 18px rgba(0,0,0,.18); z-index: 3;
@@ -94,7 +104,7 @@ body.index-page.modal-open .modal-backdrop.show { background: rgba(0,0,0,.82); }
 .modal-checkout .sel-list { max-height: 260px; overflow: auto; scrollbar-width: thin; }
 .modal-checkout .sel-item { font-size: 13px; color: #0c102d; padding: 6px 10px; border: 1px dashed #e6e6e6; border-radius: 10px; background: #fafafa; }
 .modal-checkout .total-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: 12px; background: #fff; border: 1px solid #e6e6e6; margin-top: 8px; }
-.modal-checkout .total-value { color: #f5ae28; font-weight: 900; font-size: 18px; }
+.modal-checkout .total-value { color: #D3AF37; font-weight: 900; font-size: 18px; }
 
 /* botões */
 .modal-checkout .btn-success, .modal-viewer .btn-success { background: #28a745; color: #fff; border-radius: 12px; border: none; }
@@ -114,7 +124,7 @@ body.index-page.modal-open .modal-backdrop.show { background: rgba(0,0,0,.82); }
   font-size: 12px;
   font-weight: 700;
   box-shadow: 0 2px 8px rgba(0,0,0,.12);
-  pointer-events: none; /* não intercepta o clique do card */
+  pointer-events: none;
 }
 
 /* subtexto no rodapé do card (instrução de clique) */
@@ -122,7 +132,7 @@ body.index-page.modal-open .modal-backdrop.show { background: rgba(0,0,0,.82); }
   margin-top: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: #f3d085;           /* dourado mais claro para contrastar no gradiente */
+  color: #f3d085;
   text-shadow: 0 1px 6px rgba(0,0,0,.6);
   letter-spacing: .2px;
 }
@@ -131,7 +141,7 @@ body.index-page.modal-open .modal-backdrop.show { background: rgba(0,0,0,.82); }
 #comprar-fotos .btn-success,
 .modal-checkout .btn-success,
 .modal-viewer .btn-success {
-  background: linear-gradient(180deg, #fff3b0 0%, #f5ae28 100%);
+  background: linear-gradient(180deg, #fff3b0 0%, #D3AF37 100%);
   color: #0c102d;
   border: 1px solid #f2c56a;
   border-radius: 12px;
@@ -168,8 +178,8 @@ body.index-page.modal-open .modal-backdrop.show { background: rgba(0,0,0,.82); }
 .modal-checkout .btn-outline-secondary,
 .modal-viewer .btn-outline-secondary {
   background: transparent;
-  color: #f5ae28;
-  border: 1px solid #f5ae28;
+  color: #D3AF37;
+  border: 1px solid #D3AF37;
   border-radius: 12px;
   font-weight: 700;
 }
@@ -177,7 +187,7 @@ body.index-page.modal-open .modal-backdrop.show { background: rgba(0,0,0,.82); }
 #comprar-fotos .btn-outline-secondary:hover,
 .modal-checkout .btn-outline-secondary:hover,
 .modal-viewer .btn-outline-secondary:hover {
-  background: #f5ae28;
+  background: #D3AF37;
   color: #0c102d;
   box-shadow: 0 6px 14px rgba(245, 174, 40, .2);
 }
@@ -196,14 +206,14 @@ body.index-page.modal-open .modal-backdrop.show { background: rgba(0,0,0,.82); }
 /* Badge no tema claro */
 #comprar-fotos .badge {
   background: #0c102d;
-  color: #f5ae28;
+  color: #D3AF37;
   border: 1px solid rgba(12,16,45,.08);
   border-radius: 999px;
   font-weight: 700;
 }
 
 /* Rodapé de total (se quiser reforçar o tom) */
-#comprar-fotos .total-row .total-value { color: #f5ae28; }
+#comprar-fotos .total-row .total-value { color: #D3AF37; }
 
 html, body, #root { min-height: 100%; }
 

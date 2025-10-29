@@ -40,7 +40,7 @@ export default function ModalidadesGrid({ cards = defaultCards }) {
   };
 
   const titleStyle = {
-    color: "#f5ae28",
+    color: "#000080",
     fontFamily: "Parisienne, cursive",
     fontWeight: 400,
     fontSize: "36px",

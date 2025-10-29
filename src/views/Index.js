@@ -1,10 +1,9 @@
 // src/views/Index.js
 import React from "react";
 
-// CSS globais — sempre aqui!
-import "bootstrap/dist/css/bootstrap.min.css";
-import "assets/css/blk-design-system-react.css";
-import "assets/css/global.css";
+import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/css/global.css'; // por último
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";

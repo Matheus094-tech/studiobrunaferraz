@@ -35,7 +35,7 @@ export default function SobreNosSection({ images = defaultImages }) {
     const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
 
     const titleStyle = {
-        color: "#f5ae28",
+        color: "#000080",
         fontFamily: "Parisienne, cursive",
         fontWeight: 400,
         fontSize: "36px",
@@ -44,7 +44,7 @@ export default function SobreNosSection({ images = defaultImages }) {
     };
 
     const textStyle = {
-        color: "#f5ae28",
+        color: "#D3AF37",
         fontSize: "18px",
         lineHeight: 1.8,
         letterSpacing: "0.3px",
@@ -194,7 +194,7 @@ export default function SobreNosSection({ images = defaultImages }) {
                             left: 10,
                             transform: "translateY(-50%)",
                             background: "#ECE9E9",
-                            color: "#f5ae28",
+                            color: "#D3AF37",
                             border: "none",
                             borderRadius: "50%",
                             width: 44,
@@ -217,7 +217,7 @@ export default function SobreNosSection({ images = defaultImages }) {
                             right: 10,
                             transform: "translateY(-50%)",
                             background: "#ECE9E9",
-                            color: "#f5ae28",
+                            color: "#D3AF37",
                             border: "none",
                             borderRadius: "50%",
                             width: 44,
@@ -239,7 +239,7 @@ export default function SobreNosSection({ images = defaultImages }) {
                             top: 8,
                             right: 8,
                             background: "#ECE9E9",
-                            color: "#f5ae28",
+                            color: "#D3AF37",
                             border: "none",
                             borderRadius: "50%",
                             width: 38,

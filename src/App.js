@@ -1,4 +1,8 @@
 // src/App.js
+// CSS globais — sempre aqui!
+import "./assets/css/global.css";
+
+
 import React, { Suspense, lazy, useEffect } from "react";
 import Layout from "components/layout/Layout";
 import ScrollToTop from "components/ScrollToTop";
@@ -32,7 +36,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="/sobre" element={<SobreNos />} />
           <Route path="/modalidades" element={<Modalidades />} />
-          <Route path="/eventos" element={<Eventos />} />
+          {/* <Route path="/eventos" element={<Eventos />} /> */}
           <Route path="/contato" element={<Contato />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="*" element={<NotFound />} />

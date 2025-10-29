@@ -38,7 +38,7 @@ export default function BotaoWhatsapp() {
           bottom: "70px",
           right: isVisible ? "0" : "-9999px",
           backgroundColor: "#0c102d",
-          color: "#f5ae28",
+          color: "#D3AF37",
           padding: "8px 14px",
           borderRadius: "20px",
           fontSize: "14px",
